@@ -1,0 +1,32 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
+use {{ modelNamespace }};
+
+class {{ name }}Service {
+
+    public function all($limit): LengthAwarePaginator {
+        return {{ modelName }}::query()->paginate($limit);
+    }
+
+    public function create(array $data): Model|{{ modelName }} {
+        return {{ modelName }}::query()->create($data);
+    }
+
+    public function find(int $id): Model|{{ modelName }} {
+        return {{ modelName }}::query()->findOrFail($id);
+    }
+
+    public function update(int $id, array $data): Model|{{ modelName }} {
+        $model = $this->find($id);
+        $model->update($data);
+        return $model;
+    }
+
+    public function delete({{ modelName }} $model): void {
+        $model->delete();
+    }
+}
