@@ -1,11 +1,11 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Http\Controllers\Generator;
+namespace Uzinfocom\LaravelGenerator\Http\Controllers\Generator;
 
 use Exception;
-use Ijodkor\LaravelGenerator\Http\Controllers\Controller;
-use Ijodkor\LaravelGenerator\Http\Requests\ModelGenerateRequest;
-use Ijodkor\LaravelGenerator\Services\Generator;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Controller;
+use Uzinfocom\LaravelGenerator\Http\Requests\ModelGenerateRequest;
+use Uzinfocom\LaravelGenerator\Services\Generator;
 
 class ModelGenerateController extends Controller {
 

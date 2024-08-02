@@ -1,11 +1,11 @@
 <?php
 
-use Ijodkor\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
-use Ijodkor\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
-use Ijodkor\LaravelGenerator\Http\Controllers\Generator\RequestGenerateController;
-use Ijodkor\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
-use Ijodkor\LaravelGenerator\Http\Controllers\Generator\ServiceGenerateController;
-use Ijodkor\LaravelGenerator\Http\Controllers\MainController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ServiceGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class)->name('generator.index');

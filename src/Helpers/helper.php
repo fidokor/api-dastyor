@@ -1,3 +1,3 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Helpers;
+namespace Uzinfocom\LaravelGenerator\Helpers;

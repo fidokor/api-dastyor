@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ijodkor\\LaravelGenerator\\": "src/"
+            "Uzinfocom\\LaravelGenerator\\": "src/"
         },
         "files": [
             "src/Helpers/helper.php"
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ijodkor\\LaravelGenerator\\MainServiceProvider"
+                "Uzinfocom\\LaravelGenerator\\MainServiceProvider"
             ],
             "aliases": {
-                "Horizon": "Ijodkor\\LaravelGenerator\\LaravelGenerator"
+                "LaravelGenerator": "Uzinfocom\\LaravelGenerator"
             }
         }
     }

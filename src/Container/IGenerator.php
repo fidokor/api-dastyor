@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Container;
+namespace Uzinfocom\LaravelGenerator\Container;
 
 interface IGenerator {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Livewire;
+namespace Uzinfocom\LaravelGenerator\Livewire;
 
-use Ijodkor\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

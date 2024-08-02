@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Http\Controllers;
+namespace Uzinfocom\LaravelGenerator\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 

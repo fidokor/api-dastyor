@@ -1,8 +1,8 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Services;
+namespace Uzinfocom\LaravelGenerator\Services;
 
-use Ijodkor\LaravelGenerator\Helpers\StorageManager;
+use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
 use Illuminate\Support\Facades\File;
 
 class AllGenerator {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Livewire;
+namespace Uzinfocom\LaravelGenerator\Livewire;
 
 class RequestWire extends GeneratorWire {
 

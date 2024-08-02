@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Console\Commands;
+namespace Uzinfocom\LaravelGenerator\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

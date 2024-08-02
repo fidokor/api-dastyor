@@ -1,23 +1,20 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator;
+namespace Uzinfocom\LaravelGenerator;
 
-use Ijodkor\LaravelGenerator\Boot\Boot;
-use Ijodkor\LaravelGenerator\Livewire\ControllerWire;
-use Ijodkor\LaravelGenerator\Livewire\GeneratorWire;
-use Ijodkor\LaravelGenerator\Livewire\ModelWire;
-use Ijodkor\LaravelGenerator\Livewire\RequestWire;
-use Ijodkor\LaravelGenerator\Livewire\ResourceWire;
-use Ijodkor\LaravelGenerator\Livewire\ServiceWire;
 use Illuminate\Contracts\Foundation\CachesRoutes;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
+use Uzinfocom\LaravelGenerator\Livewire\ModelWire;
+use Uzinfocom\LaravelGenerator\Livewire\RequestWire;
+use Uzinfocom\LaravelGenerator\Livewire\ResourceWire;
+use Uzinfocom\LaravelGenerator\Livewire\ServiceWire;
 
 class MainServiceProvider extends ServiceProvider {
-//    use EventMap, ServiceBindings;
 
-    private string $conf = "generator";
     private string $namespace;
 
     public function __construct($app) {
@@ -70,7 +67,7 @@ class MainServiceProvider extends ServiceProvider {
         Route::group([
             'domain' => config("$this->namespace.domain", null),
             'prefix' => config("$this->namespace.path"),
-            'namespace' => 'Ijodkor\LaravelGenerator\Http\Controllers',
+            'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
             'middleware' => config("$this->namespace.middleware", 'web'),
         ], function() {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -95,11 +92,11 @@ class MainServiceProvider extends ServiceProvider {
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../stubs/H.stub' => app_path('Providers/MainServiceProvider.php'),
-            ], "$this->conf-provider");
+            ], "$this->namespace-provider");
 
             $this->publishes([
-                __DIR__ . "/../config/$this->conf.php" => config_path("$this->conf.php"),
-            ], "$this->conf-config");
+                __DIR__ . "/../config/$this->namespace.php" => config_path("$this->namespace.php"),
+            ], "$this->namespace-config");
         }
     }
 

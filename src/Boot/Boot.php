@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Boot;
+namespace Uzinfocom\LaravelGenerator\Boot;
 
 class Boot {
     public const ROOT = "generator";

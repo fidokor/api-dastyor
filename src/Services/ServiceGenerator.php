@@ -1,8 +1,8 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Services;
+namespace Uzinfocom\LaravelGenerator\Services;
 
-use Ijodkor\LaravelGenerator\Container\IGenerator;
+use Uzinfocom\LaravelGenerator\Container\IGenerator;
 
 class ServiceGenerator extends AllGenerator implements IGenerator {
     public function __construct() {

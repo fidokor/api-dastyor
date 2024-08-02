@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Services;
+namespace Uzinfocom\LaravelGenerator\Services;
 
 use Illuminate\Support\Arr;
 

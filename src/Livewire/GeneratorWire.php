@@ -1,9 +1,9 @@
 <?php
 
-namespace Ijodkor\LaravelGenerator\Livewire;
+namespace Uzinfocom\LaravelGenerator\Livewire;
 
-use Ijodkor\LaravelGenerator\Boot\Boot;
-use Ijodkor\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
