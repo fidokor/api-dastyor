@@ -1,11 +1,4 @@
-@php use Uzinfocom\LaravelGenerator\Boot\Boot; @endphp
-@extends(Boot::getView('layouts.app'))
-@section('title')
-@endsection
-
-@section('header')
-@endsection
-
+@extends(config('generator.layout'))
 @section('content')
     <div class="row">
         <div class="col-6 col-lg-6">
