@@ -1,3 +1,4 @@
+@php use Uzinfocom\LaravelGenerator\Boot\Boot; @endphp
 <!DOCTYPE html>
 <html
     lang="en"
@@ -96,12 +97,12 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <div class="layout-page">
-                @include('layouts.navbar')
+                @include(Boot::getView('layouts.navbar'))
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @yield('content')
                     </div>
-                    @include('layouts.footer')
+                    @include(Boot::getView('layouts.footer'))
                     <div class="content-backdrop fade"></div>
                 </div>
             </div>

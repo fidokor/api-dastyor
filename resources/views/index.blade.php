@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@php use Uzinfocom\LaravelGenerator\Boot\Boot; @endphp
+@extends(Boot::getView('layouts.app'))
 @section('title')
 @endsection
 

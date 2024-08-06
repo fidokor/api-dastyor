@@ -8,13 +8,16 @@ class GenerateModel extends AllGenerator {
 
     public function __construct() {
         $this->stab = 'model.stub';
-        $this->group = "Model.php";
+        $this->group = ".php";
     }
 
     public function generate(array $table, string $name, string $namespace): void {
         $columns = $this->getTableColumns($table['name']);
-        $properties = $this->generatePropertyAnnotations($columns);
-        $attributes = $this->generateFillableProperties($columns);
+
+        // Annotated properties
+        $properties = $this->getProperties($columns);
+        // Fillable fields
+        $attributes = $this->getAttributes($columns);
 
         // Read boilerplate from storage
         $stub = $this->getStub();
@@ -48,7 +51,7 @@ class GenerateModel extends AllGenerator {
         return $columnDetails;
     }
 
-    protected function generatePropertyAnnotations($columns): string {
+    protected function getProperties($columns): string {
         $annotations = [];
         foreach ($columns as $column => $type) {
             $annotations[] = " * @property \${$column}";
@@ -56,7 +59,7 @@ class GenerateModel extends AllGenerator {
         return implode("\n", $annotations);
     }
 
-    protected function generateFillableProperties($columns): string {
+    protected function getAttributes($columns): string {
         $fillable = array_keys($columns);
         $fillable = array_diff($fillable, ['id', 'created_at', 'updated_at', 'deleted_at']);
         return "['" . implode("', '", $fillable) . "']";

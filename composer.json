@@ -13,7 +13,8 @@
             "email": "qurbonboyev9820@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^8.2",
         "ijodkor/laravel-api-response": "^1.2",
