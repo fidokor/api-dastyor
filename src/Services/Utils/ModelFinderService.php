@@ -62,4 +62,30 @@ class ModelFinderService {
 
         return array_unique($models);
     }
+
+    function getControllers(string $directory): array {
+        $controllers = [];
+        $files = $this->scan($directory);
+
+        // Require all file that php can identify as file
+        foreach ($files as $file) {
+            require_once $file;
+        }
+
+        $classes = get_declared_classes();
+        foreach ($classes as $class) {
+            $isSubClass = is_subclass_of($class, \App\Http\Controllers\Controller::class);
+            try {
+                $isAbstract = (new ReflectionClass($class))->isAbstract();
+
+                if ($isSubClass && !$isAbstract && Str::startsWith($class, self::APP)) {
+                    $controllers[] = $class;
+                }
+            } catch (ReflectionException) {
+
+            }
+        }
+
+        return array_unique($controllers);
+    }
 }

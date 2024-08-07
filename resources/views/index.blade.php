@@ -20,5 +20,9 @@
         <div class="col-4">
             <livewire:resource-wire/>
         </div>
+
+        <div class="col-4">
+            <livewire:method-wire/>
+        </div>
     </div>
 @endsection
