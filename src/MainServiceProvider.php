@@ -36,7 +36,9 @@ class MainServiceProvider extends ServiceProvider {
         $this->registerResources();
 
         $this->registerLiveWire();
-        $this->offerPublishing();
+//        $this->offerPublishing();
+
+        $this->assetsPublish();
     }
 
     /**
@@ -143,7 +145,7 @@ class MainServiceProvider extends ServiceProvider {
             __DIR__ . '/../config/generator.php', $this->namespace
         );
 
-//        H::use(config('H.use', 'default'));
+        // H::use(config('H.use', 'default'));
     }
 
     /**
@@ -165,5 +167,11 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("request-wire"), RequestWire::class);
         Livewire::component(Boot::getWire("service-wire"), ServiceWire::class);
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
+    }
+
+    private function assetsPublish(): void {
+        $this->publishes([
+            __DIR__ . '/../assets' => public_path('vendor/generator/assets'),
+        ], 'assets');
     }
 }
