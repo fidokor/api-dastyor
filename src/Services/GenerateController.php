@@ -3,6 +3,7 @@
 namespace Uzinfocom\LaravelGenerator\Services;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class GenerateController extends AllGenerator {
 
@@ -18,15 +19,24 @@ class GenerateController extends AllGenerator {
 
         // Model
         $modelName = $model['name'];
+        $modelNamePlural = Str::plural(Str::lcfirst($modelName));
+        $modelNameSingular = Str::lcfirst($modelName);
+        $modelResourceName = Str::lower(preg_replace('/([a-z])([A-Z])/', '$1-$2', Str::plural($modelName)));
 
         $content = str_replace([
             '{{ namespace }}',
             '{{ name }}',
             '{{ modelName }}',
+            '{{ modelNamePlural }}',
+            '{{ modelNameSingular }}',
+            '{{ modelResourceName }}',
         ], [
             $namespace,
             $name,
             $modelName,
+            $modelNamePlural,
+            $modelNameSingular,
+            $modelResourceName,
         ], $stub);
 
         // Make a director if it does not exist
