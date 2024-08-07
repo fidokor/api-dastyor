@@ -1,6 +1,7 @@
 <?php
 
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
@@ -16,6 +17,7 @@ Route::prefix('/generate')->group(function() {
     Route::post('requests', RequestGenerateController::class)->name('requests.store');
     Route::post('resources', ResourceGenerateController::class)->name('resources.store');
     Route::post('controllers', ControllerGenerateController::class)->name('controllers.store');
+    Route::post('methods', MethodGenerateController::class)->name('methods.store');
 });
 
 // Catch-all Route...
