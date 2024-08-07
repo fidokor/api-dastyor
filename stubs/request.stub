@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Foundation\Http\FormRequest;
+use Ijodkor\ApiResponse\Requests\RestRequest;
 
-class {{ name }}Request extends FormRequest {
+class {{ name }}Request extends RestRequest {
 
     public function authorize(): bool {
         return true;
