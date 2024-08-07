@@ -6,14 +6,7 @@
   font-family: "tabler-icons";
   font-style: normal;
   font-weight: 400;
-  src: url("../vendor/fonts/tabler/tabler-icons.eot");
-  src: url("../vendor/fonts/tabler/tabler-icons.eot?#iefix") format("embedded-opentype"), url("../vendor/fonts/tabler/tabler-icons.woff2") format("woff2"), url("../vendor/fonts/tabler/tabler-icons.woff") format("woff"), url("../vendor/fonts/tabler/tabler-icons.ttf") format("truetype");
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  @font-face {
-    font-family: "tabler-icons";
-    src: url("tabler/tabler-icons.svg#tabler-icons") format("svg");
-  }
+  src: url("../fonts/tabler/tabler-icons.woff2") format("woff2"), url("../fonts/tabler/tabler-icons.woff") format("woff");
 }
 .ti {
   vertical-align: middle;

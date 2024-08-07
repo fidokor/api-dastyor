@@ -2,10 +2,10 @@
 
 namespace Uzinfocom\LaravelGenerator\Livewire;
 
-use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Uzinfocom\LaravelGenerator\Boot\Boot;
 
 class ModelWire extends GeneratorWire {
 
@@ -21,6 +21,11 @@ class ModelWire extends GeneratorWire {
     public string $namespace = "App\Models";
 
     public function choose(): void {
+        if (!isset($this->tableName)) {
+            $this->convertedName = "";
+            return;
+        }
+
         $string = Str::replace('_', ' ', $this->tableName);
         $string = ucwords($string);
         $string = Str::replace(' ', '', $string);

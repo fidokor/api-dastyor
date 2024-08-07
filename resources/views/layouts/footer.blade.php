@@ -3,30 +3,22 @@
         <div
             class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
             <div>
-                ©
-                <script>
-                    document.write(new Date().getFullYear());
-                </script>
-                , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-medium">Pixinvent</a>
+                <span>© 2024 - </span> <script>document.write(new Date().getFullYear());</script>
+                <span> Agro loyihlar ishlab chiqish bo&#8216;limi</span>
+                <a href="https://uzinfocom.uz" target="_blank" class="fw-medium">Uzinfocom</a>
             </div>
             <div class="d-none d-lg-inline-block">
-                <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank"
-                >License</a
-                >
-                <a href="https://1.envato.market/pixinvent_portfolio" target="_blank" class="footer-link me-4"
-                >More Themes</a
-                >
+                <a href="#" class="footer-link me-4" target="_blank">
+                    Ruxsatnoma
+                </a>
 
-                <a
-                    href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                >Documentation</a
-                >
+                <a href="#" target="_blank" class="footer-link me-4">
+                    Qo&#8216;llanma
+                </a>
 
-                <a href="https://pixinvent.ticksy.com/" target="_blank" class="footer-link d-none d-sm-inline-block"
-                >Support</a
-                >
+                <a href="mailto:anvarindastries@gmail.com" target="_blank" class="footer-link d-none d-sm-inline-block">
+                    Aloqa uchun
+                </a>
             </div>
         </div>
     </div>

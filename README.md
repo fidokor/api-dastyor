@@ -38,3 +38,4 @@ Add RestResponse trait to app module Controller file or any controller which is 
 
 - [Create Laravel package](https://laravel-news.com/building-your-own-laravel-packages)
 - [Create package](https://medium.com/@prevailexcellent/how-i-created-my-third-laravel-package-step-by-step-guide-ad3fb0da5399)
+- [Publish assets](https://freek.dev/424-publishing-package-assets-the-right-way)

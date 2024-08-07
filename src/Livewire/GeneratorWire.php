@@ -43,7 +43,7 @@ class GeneratorWire extends Component {
             return $m->name == $this->modelName;
         })->first();
 
-        $this->modelNamespace = $model->namespace;
+        $this->modelNamespace = $model?->namespace ?? "";
     }
 
     public function change(): void {
