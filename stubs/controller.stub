@@ -5,6 +5,7 @@ namespace {{ namespace }};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Spatie\RouteAttributes\Attributes\ApiResource;
 use Ijodkor\ApiResponse\Responses\RestResponse;
 use App\Services\{{ modelName }}Service;
 use App\Http\Requests\{{ modelName }}CreateRequest;
@@ -54,10 +55,9 @@ class {{ name }}Controller extends Controller {
         }
     }
 
-    public function destroy(string $id): JsonResponse {
+    public function destroy(int $id): JsonResponse {
        try {
-            $model = $this->service->find($id);
-            $this->service->delete($model);
+            $this->service->delete($id);
             return $this->success();
         } catch (Exception $exception) {
             return $this->fail(message: $exception->getMessage());

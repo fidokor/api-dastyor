@@ -26,7 +26,8 @@ class {{ name }}Service {
         return $model;
     }
 
-    public function delete({{ modelName }} $model): void {
+    public function delete(int $id): void {
+        $model = $this->find($id);
         $model->delete();
     }
 }
