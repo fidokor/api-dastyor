@@ -11,7 +11,6 @@ class Boot {
     public static function getView(string $string): string {
         return self::ROOT . "::" . $string;
     }
-
     public static function getWire(string $string): string {
         return $string;
     }
