@@ -11,6 +11,9 @@ use App\Http\Requests\{{ modelName }}CreateRequest;
 use App\Http\Requests\{{ modelName }}UpdateRequest;
 use App\Http\Resources\{{ modelName }}Resource;
 
+#[ApiResource(
+    resource: '{{ modelResourceName }}'
+)]
 class {{ name }}Controller extends Controller {
     use RestResponse;
 
@@ -22,7 +25,7 @@ class {{ name }}Controller extends Controller {
     public function index(Request $request): JsonResponse {
         try {
             $paginate = $request->query('paginate') ?? 12;
-            return $this->paginated({{ modelName }}Resource::collection($this->service->all($paginate)), 'models');
+            return $this->paginated({{ modelName }}Resource::collection($this->service->all($paginate)), '{{ modelNamePlural }}');
         } catch (Exception $exception) {
             return $this->fail(message: $exception->getMessage());
         }
@@ -31,7 +34,7 @@ class {{ name }}Controller extends Controller {
     public function store({{ modelName }}CreateRequest $request): JsonResponse {
         try {
             $model = $this->service->create($request->validated());
-            return $this->success(['model' => $model]);
+            return $this->success(['{{ modelNameSingular }}' => $model]);
         } catch (Exception $exception) {
             return $this->fail(message: $exception->getMessage());
         }
@@ -39,21 +42,25 @@ class {{ name }}Controller extends Controller {
 
     public function show(int $id): JsonResponse {
         $model = $this->service->find($id);
-        return $this->success(['model' => {{ modelName }}Resource::make($model)]);
+        return $this->success(['{{ modelNameSingular }}' => {{ modelName }}Resource::make($model)]);
     }
 
     public function update({{ modelName }}UpdateRequest $request, string $id): JsonResponse {
         try {
             $model = $this->service->update($id, $request->validated());
-            return $this->success(['model' => $model]);
+            return $this->success(['{{ modelNameSingular }}' => $model]);
         } catch (Exception $exception) {
             return $this->fail(message: $exception->getMessage());
         }
     }
 
     public function destroy(string $id): JsonResponse {
-        $model = $this->service->find($id);
-        $this->service->delete($model);
-        return $this->success();
+       try {
+            $model = $this->service->find($id);
+            $this->service->delete($model);
+            return $this->success();
+        } catch (Exception $exception) {
+            return $this->fail(message: $exception->getMessage());
+        }
     }
 }
