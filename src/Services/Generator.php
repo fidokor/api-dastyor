@@ -11,6 +11,7 @@ readonly class Generator {
         private GenerateResource   $resource,
         private GenerateRequest    $request,
         private GenerateController $controller,
+        private GenerateMethod     $method,
         private GenerateRoute      $generateRoute,
     ) {
     }
@@ -100,5 +101,14 @@ readonly class Generator {
         $namespace = Arr::get($attributes, 'namespace');
 
         $this->controller->generate($model, $name, $namespace);
+    }
+
+    public function generateMethod(array $attributes): void {
+        /** Controller class **/
+        $controller = Arr::get($attributes, 'controller');
+        $name = Arr::get($attributes, 'name');
+        $namespace = Arr::get($attributes, 'namespace');
+
+        $this->method->generate($namespace, $controller, $name);
     }
 }

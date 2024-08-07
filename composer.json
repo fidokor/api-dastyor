@@ -24,7 +24,8 @@
         "livewire/livewire": "^3.5"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0|^8.0|^9.0"
+        "orchestra/testbench": "^7.0|^8.0|^9.0",
+        "symfony/symfony": "^7.1"
     },
     "autoload": {
         "psr-4": {
