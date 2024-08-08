@@ -2,21 +2,33 @@
 
 namespace Uzinfocom\LaravelGenerator\Services;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Exception;
+use Illuminate\Support\Facades\File;
 
 class GenerateMethod extends AllGenerator {
 
     public function __construct() {
-        $this->stab = 'controller.stub';
-        $this->group = "Controller.php";
+        $this->stab = 'method.stub';
+        $this->group = ".php";
     }
 
-    public function generate(string $namespace, string $controller, string $name): void {
-        /* @var Model $entity */
-        // Read boilerplate from storage
+    /**
+     * @throws Exception
+     */
+    public function generate(string $namespace, string $name): void {
+        $stub = $this->getStub();
+        $content = str_replace([
+            '{{ methodName }}',
+        ], [
+            $name,
+        ], $stub);
 
+        $location = $this->resolvePath($namespace);
+        $array = file(base_path($location . $this->group));
 
-        dd($namespace, $controller, $name);
+        array_splice($array, array_key_last($array), 0, $content);
+
+        $content = implode("", $array);
+        $this->overwrite($location, $content);
     }
 }
