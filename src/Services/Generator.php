@@ -6,13 +6,14 @@ use Illuminate\Support\Arr;
 
 readonly class Generator {
     public function __construct(
-        private GenerateModel      $generateModel,
-        private ServiceGenerator   $service,
-        private GenerateResource   $resource,
-        private GenerateRequest    $request,
-        private GenerateController $controller,
-        private GenerateMethod     $method,
-        private GenerateRoute      $generateRoute,
+        private GenerateModel              $generateModel,
+        private ServiceGenerator           $service,
+        private GenerateResource           $resource,
+        private GenerateRequest            $request,
+        private GenerateController         $controller,
+        private GenerateCrud               $crud,
+        private GenerateMethod             $method,
+        private GenerateRoute              $generateRoute,
     ) {
     }
 
@@ -101,6 +102,32 @@ readonly class Generator {
         $namespace = Arr::get($attributes, 'namespace');
 
         $this->controller->generate($model, $name, $namespace);
+    }
+
+    public function generateCrud(array $attributes): void {
+        /** Crud **/
+
+        $baseController = Arr::get($attributes, 'model.name');
+
+        $controllerPrefix = Arr::get($attributes, 'controller.prefix');
+        $controllerName = Arr::get($attributes, 'controller.name');
+        $controllerSuffix = Arr::get($attributes, 'controller.suffix');
+
+        $createRequestPrefix = Arr::get($attributes, 'request.create.prefix');
+        $createRequestName = Arr::get($attributes, 'request.create.name');
+        $createRequestSuffix = Arr::get($attributes, 'request.create.suffix');
+
+        $updateRequestPrefix = Arr::get($attributes, 'request.update.prefix');
+        $updateRequestName = Arr::get($attributes, 'request.update.name');
+        $updateRequestSuffix = Arr::get($attributes, 'request.update.suffix');
+
+        $modelName = Arr::get($attributes, 'model.name');
+        $model = Arr::get($attributes, 'model');
+        $controller = Arr::get($attributes, 'controller');
+        $name = Arr::get($controller, 'name');
+        $namespace = Arr::get($controller, 'namespace');
+
+        $this->crud->generate($model, $name, $namespace);
     }
 
     /**

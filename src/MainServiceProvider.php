@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Livewire\AdvancedCrudWire;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
 use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
 use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
@@ -178,7 +179,7 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("request-wire"), RequestWire::class);
         Livewire::component(Boot::getWire("service-wire"), ServiceWire::class);
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
-
+        Livewire::component(Boot::getWire("advanced-crud-wire"), AdvancedCrudWire::class);
         // Additional
         Livewire::component(Boot::getWire("migration-wire"), MigrationWire::class);
     }
