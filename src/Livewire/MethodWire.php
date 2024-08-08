@@ -11,7 +11,6 @@ use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
 
 class MethodWire extends GeneratorWire {
 
-    public string $controller;
     public string $namespace;
 
     public array $meta = [
@@ -23,10 +22,6 @@ class MethodWire extends GeneratorWire {
 
     public function boot(ModelFinderService $modelFinder): void {
         $this->controllers = $this->getControllers($modelFinder);
-    }
-
-    public function choose(): void {
-        $this->namespace = $this->controller;
     }
 
     public function render(): View {
