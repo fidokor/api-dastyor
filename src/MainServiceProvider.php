@@ -72,7 +72,7 @@ class MainServiceProvider extends ServiceProvider {
         Route::group([
             'domain' => config("$this->namespace.domain", null),
             'prefix' => config("$this->namespace.path"),
-            'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
+            // 'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
             'middleware' => config("$this->namespace.middleware", 'web'),
         ], function() {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');

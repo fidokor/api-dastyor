@@ -5,7 +5,7 @@ namespace Uzinfocom\LaravelGenerator\Services;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 
 class GenerateModel extends AllGenerator {
 
@@ -96,7 +96,7 @@ class GenerateModel extends AllGenerator {
             ->get();
 
         $stub = $this->getRelationStub($this->belongsToStub);
-        $modelFinder = new ModelFinderService();
+        $modelFinder = new EntityFinderService();
         $models = $modelFinder->getModels(app_path());
 
         $content = [];
@@ -138,7 +138,7 @@ class GenerateModel extends AllGenerator {
             ->get();
 
         $stub = $this->getRelationStub($this->hasManyStub);
-        $modelFinder = new ModelFinderService();
+        $modelFinder = new EntityFinderService();
         $models = $modelFinder->getModels(app_path());
 
         $content = [];
