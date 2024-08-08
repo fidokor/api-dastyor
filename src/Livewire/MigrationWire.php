@@ -30,7 +30,7 @@ class MigrationWire extends GeneratorWire {
         $this->types = collect();
 
         // Types
-        $types = File::get(Boot::getDatabase("postgres.types.json"));
+        $types = File::get(Boot::getDatabase("data-types.json"));
         foreach (json_decode($types) as $type) {
             $this->types->push($type);
         }
