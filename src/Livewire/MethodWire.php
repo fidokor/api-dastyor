@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 
 class MethodWire extends GeneratorWire {
 
@@ -20,7 +20,7 @@ class MethodWire extends GeneratorWire {
 
     private readonly Collection $controllers;
 
-    public function boot(ModelFinderService $modelFinder): void {
+    public function boot(EntityFinderService $modelFinder): void {
         $this->controllers = $this->getControllers($modelFinder);
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 
 class MigrationWire extends GeneratorWire {
 
@@ -36,7 +36,7 @@ class MigrationWire extends GeneratorWire {
         }
     }
 
-    public function boot(ModelFinderService $modelFinder): void { }
+    public function boot(EntityFinderService $modelFinder): void { }
 
     public function choose(): void {
         if (!isset($this->tableName)) {

@@ -10,7 +10,7 @@ use ReflectionClass;
 use ReflectionException;
 use SplFileInfo;
 
-class ModelFinderService {
+class EntityFinderService {
     public const NECESSARY_FILE = "php";
     public const APP = "App\\";
 
@@ -38,33 +38,15 @@ class ModelFinderService {
      * Retrieve models
      */
     function getModels(string $directory): array {
-        $models = [];
-        $files = $this->scan($directory);
-
-        // Require all file that php can identify as file
-        foreach ($files as $file) {
-            require_once $file;
-        }
-
-        $classes = get_declared_classes();
-        foreach ($classes as $class) {
-            $isSubClass = is_subclass_of($class, Model::class);
-            try {
-                $isAbstract = (new ReflectionClass($class))->isAbstract();
-
-                if ($isSubClass && !$isAbstract && Str::startsWith($class, self::APP)) {
-                    $models[] = $class;
-                }
-            } catch (ReflectionException) {
-
-            }
-        }
-
-        return array_unique($models);
+        return $this->getDeclaredClasses($directory, Model::class);
     }
 
     function getControllers(string $directory): array {
-        $controllers = [];
+        return $this->getDeclaredClasses($directory, "App\Http\Controllers\Controller");
+    }
+
+    public function getDeclaredClasses(string $directory, string $className): array {
+        $instances = [];
         $files = $this->scan($directory);
 
         // Require all file that php can identify as file
@@ -74,18 +56,18 @@ class ModelFinderService {
 
         $classes = get_declared_classes();
         foreach ($classes as $class) {
-            $isSubClass = is_subclass_of($class, \App\Http\Controllers\Controller::class);
+            $isSubClass = is_subclass_of($class, $className);
             try {
                 $isAbstract = (new ReflectionClass($class))->isAbstract();
 
                 if ($isSubClass && !$isAbstract && Str::startsWith($class, self::APP)) {
-                    $controllers[] = $class;
+                    $instances[] = $class;
                 }
             } catch (ReflectionException) {
 
             }
         }
 
-        return array_unique($controllers);
+        return array_unique($instances);
     }
 }
