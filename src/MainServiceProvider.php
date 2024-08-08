@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
+use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
 use Uzinfocom\LaravelGenerator\Livewire\ModelWire;
 use Uzinfocom\LaravelGenerator\Livewire\RequestWire;
 use Uzinfocom\LaravelGenerator\Livewire\ResourceWire;
@@ -162,6 +163,7 @@ class MainServiceProvider extends ServiceProvider {
     }
 
     private function registerLiveWire(): void {
+        Livewire::component(Boot::getWire("method-wire"), MethodWire::class);
         Livewire::component(Boot::getWire("model-wire"), ModelWire::class);
         Livewire::component(Boot::getWire("controller-wire"), ControllerWire::class);
         Livewire::component(Boot::getWire("request-wire"), RequestWire::class);

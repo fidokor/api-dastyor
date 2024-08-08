@@ -65,4 +65,13 @@ class GeneratorWire extends Component {
             ];
         });
     }
+
+    public function getControllers(ModelFinderService $controllerFinder): Collection {
+        return collect($controllerFinder->getControllers(app_path()))->map(function($controller) {
+            return (object)[
+                'name' => Str::afterLast($controller, "\\"),
+                'namespace' => $controller
+            ];
+        });
+    }
 }
