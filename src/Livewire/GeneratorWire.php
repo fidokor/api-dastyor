@@ -16,7 +16,7 @@ class GeneratorWire extends Component {
         'description' => "Servis yaratuvchi",
         'route' => "services.store"
     ];
-    private string $view = "livewire.generator";
+    protected string $view = "livewire.generator";
 
     public string $modelNamespace = "";
     public string $modelName = "";
@@ -27,7 +27,7 @@ class GeneratorWire extends Component {
 
     public bool $hasError = false;
 
-    private readonly Collection $models;
+    protected readonly Collection $models;
 
     public function boot(EntityFinderService $modelFinder): void {
         $this->models = $this->getModels($modelFinder);
@@ -59,8 +59,11 @@ class GeneratorWire extends Component {
 
     private function getModels(EntityFinderService $modelFinder): Collection {
         return collect($modelFinder->getModels(app_path()))->map(function($model) {
+            $name = Str::afterLast($model, "\\");
+            $folder = Str::after(Str::before($model, $name), "App\Models\\");
             return (object)[
-                'name' => Str::afterLast($model, "\\"),
+                'name' => $name,
+                'folder' => $folder,
                 'namespace' => $model
             ];
         });
