@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Builders\MigrationBuilderController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
@@ -7,7 +9,6 @@ use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateControl
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ServiceGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\MainController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class)->name('generator.index');
 
@@ -19,6 +20,10 @@ Route::prefix('/generate')->group(function() {
     Route::post('controllers', ControllerGenerateController::class)->name('controllers.store');
     Route::post('methods', MethodGenerateController::class)->name('methods.store');
 });
+
+// Add extra
+Route::get('/migration', MigrationBuilderController::class)->name('migration.builder');
+Route::post('/migrations', [MigrationBuilderController::class, 'store'])->name('migrations.store');
 
 // Catch-all Route...
 //Route::get('/{view?}', GeneratorController::class)->where('view', '(.*)')->name('generator.index');
