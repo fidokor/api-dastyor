@@ -175,5 +175,10 @@ class MainServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/../assets' => public_path('vendor/generator/assets'),
         ], 'assets');
+
+        // Add gitignore
+        $this->publishes([
+            __DIR__ . '/../external' => public_path('vendor/generator/assets'),
+        ], 'assets');
     }
 }
