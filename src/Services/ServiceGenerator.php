@@ -5,6 +5,7 @@ namespace Uzinfocom\LaravelGenerator\Services;
 use Uzinfocom\LaravelGenerator\Container\IGenerator;
 
 class ServiceGenerator extends AllGenerator implements IGenerator {
+
     public function __construct() {
         $this->stab = 'service.stub';
         $this->group = "Service.php";

@@ -1,0 +1,4 @@
+
+    public function {{ relationName }}(): HasMany {
+       return $this->hasMany({{ relatedModel }}::class, '{{ foreignKey }}', '{{ ownKey }}');
+    }
