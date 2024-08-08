@@ -10,6 +10,7 @@ use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Uzinfocom\LaravelGenerator\Livewire\AdvancedCrudWire;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
 use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
+use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
 use Uzinfocom\LaravelGenerator\Livewire\ModelWire;
 use Uzinfocom\LaravelGenerator\Livewire\RequestWire;
 use Uzinfocom\LaravelGenerator\Livewire\ResourceWire;
@@ -41,6 +42,7 @@ class MainServiceProvider extends ServiceProvider {
 //        $this->offerPublishing();
 
         $this->assetsPublish();
+//        $this->registerHelper();
     }
 
     /**
@@ -85,6 +87,13 @@ class MainServiceProvider extends ServiceProvider {
      */
     protected function registerResources(): void {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->namespace);
+    }
+
+    /**
+     * @return void
+     */
+    public function registerHelper(): void {
+        require_once __DIR__ . '/Helpers/helper.php';
     }
 
     /**
@@ -171,6 +180,8 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("service-wire"), ServiceWire::class);
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
         Livewire::component(Boot::getWire("advanced-crud-wire"), AdvancedCrudWire::class);
+        // Additional
+        Livewire::component(Boot::getWire("migration-wire"), MigrationWire::class);
     }
 
     private function assetsPublish(): void {

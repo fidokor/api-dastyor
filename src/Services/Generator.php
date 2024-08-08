@@ -130,12 +130,12 @@ readonly class Generator {
         $this->crud->generate($model, $name, $namespace);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function generateMethod(array $attributes): void {
-        /** Controller class **/
-        $controller = Arr::get($attributes, 'controller');
-        $name = Arr::get($attributes, 'name');
         $namespace = Arr::get($attributes, 'namespace');
-
-        $this->method->generate($namespace, $controller, $name);
+        $name = Arr::get($attributes, 'name');
+        $this->method->generate($namespace, $name);
     }
 }

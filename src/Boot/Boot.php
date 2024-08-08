@@ -8,11 +8,25 @@ use Illuminate\Support\HtmlString;
 class Boot {
     public const ROOT = "generator";
 
-    public static function getView(string $string): string {
-        return self::ROOT . "::" . $string;
+    public static function getView(string $name): string {
+        return self::ROOT . "::" . $name;
     }
-    public static function getWire(string $string): string {
-        return $string;
+
+    /**
+     * name -> Print working directory
+     * @param string $directory
+     * @return string
+     */
+    public static function getPwd(string $directory): string {
+        return __DIR__ . "/../../" . $directory;
+    }
+
+    public static function getDatabase(string $filename): string {
+        return self::getPwd("database/$filename");
+    }
+
+    public static function getWire(string $wire): string {
+        return $wire;
     }
 
     public static function css(): HtmlString {

@@ -26,5 +26,9 @@ Route::prefix('/generate')->group(function() {
     Route::post('methods', MethodGenerateController::class)->name('methods.store');
 });
 
+// Add extra
+Route::get('/migration', MigrationBuilderController::class)->name('migration.builder');
+Route::post('/migrations', [MigrationBuilderController::class, 'store'])->name('migrations.store');
+
 // Catch-all Route...
 //Route::get('/{view?}', GeneratorController::class)->where('view', '(.*)')->name('generator.index');
