@@ -1,3 +1,7 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Helpers;
+if (!function_exists('customHelper')) {
+    function customHelper($param) {
+        dd($param);
+    }
+}

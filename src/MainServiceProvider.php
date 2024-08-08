@@ -41,6 +41,7 @@ class MainServiceProvider extends ServiceProvider {
 //        $this->offerPublishing();
 
         $this->assetsPublish();
+//        $this->registerHelper();
     }
 
     /**
@@ -85,6 +86,13 @@ class MainServiceProvider extends ServiceProvider {
      */
     protected function registerResources(): void {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->namespace);
+    }
+
+    /**
+     * @return void
+     */
+    public function registerHelper(): void {
+        require_once __DIR__ . '/Helpers/helper.php';
     }
 
     /**
