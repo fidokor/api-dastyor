@@ -20,16 +20,16 @@ class CrudRequest extends FormRequest {
             'controller.name' => 'required|string|between:2,255',
             'controller.suffix' => 'required|string|between:2,255',
             // create request
-            'request.create.prefix' => 'required|string|between:2,255',
-            'request.create.name' => 'required|string|between:2,255',
-            'request.create.suffix' => 'required|string|between:2,255',
+            'request.create_prefix' => 'required|string|between:2,255',
+            'request.create_name' => 'required|string|between:2,255',
+            'request.create_suffix' => 'required|string|between:2,255',
             // update request
-            'request.update.prefix' => 'required|string|between:2,255',
-            'request.update.name' => 'required|string|between:2,255',
-            'request.update.suffix' => 'required|string|between:2,255',
+            'request.update_prefix' => 'required|string|between:2,255',
+            'request.update_name' => 'required|string|between:2,255',
+            'request.update_suffix' => 'required|string|between:2,255',
 
             // crud
-            'crud.type' => 'required|string|between:2,255',
+            'crud.type' => 'required|integer',
         ];
     }
 }
