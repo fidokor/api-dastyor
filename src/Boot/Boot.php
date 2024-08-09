@@ -53,6 +53,7 @@ class Boot {
     public static function js(): HtmlString {
         $files = [
             "js/jquery.js",
+            "js/bootstrap.js",
         ];
         $scripts = [];
         foreach ($files as $file) {
