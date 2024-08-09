@@ -6,6 +6,10 @@
         <form action="{{ route($meta['route']) }}" method="post">
             @csrf
 
+            @foreach($errors->all() as $error)
+                <div class="text-danger">{{ $error }}</div>
+            @endforeach
+
             <!-- Model -->
             <div class="mb-3">
                 <label class="form-label" for="model">Model Name</label>
@@ -14,7 +18,7 @@
                     <option value="">Select model</option>
                     @foreach($models as $model)
                         <option value="{{ $model->namespace }}"
-                            {{ $model->namespace == old('modelNamespace')? 'selected' : '' }} >
+                            {{ $model->namespace == old('model.name')? 'selected' : '' }} >
                             {{ $model->name }} ({{ $model->namespace }})
                         </option>
                     @endforeach
@@ -54,13 +58,13 @@
                         <label class="form-label" for="name">Create Request Nomi</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-light">{{ $createRequestPrefix }}</span>
-                            <input type="text" name="request[create]" id="controller_name" class="form-control"
-                                   value="{{ $createRequestName }}" autocomplete="off">
+                            <input type="text" name="request[create_name]" id="controller_name" class="form-control"
+                                   value="{{ old('request.create_name',$createRequestName) }}" autocomplete="off">
                             <span class="input-group-text bg-light">{{ $createRequestSuffix }}</span>
                         </div>
                         <!-- Create Request Namespace -->
-                        <input type="hidden" name="request[create][prefix]" value="{{ $createRequestPrefix  }}">
-                        <input type="hidden" name="request[create][suffix]" value="{{ $createRequestSuffix  }}">
+                        <input type="hidden" name="request[create_prefix]" value="{{ old('request.create_prefix', $createRequestPrefix)  }}">
+                        <input type="hidden" name="request[create_suffix]" value="{{ old('request.create_suffix', $createRequestSuffix)  }}">
                         @error('request.create.name')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -72,12 +76,12 @@
                         <label class="form-label" for="name">Update Request Nomi</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-light">{{ $updateRequestPrefix }}</span>
-                            <input type="text" name="controller[name]" id="controller_name" class="form-control"
-                                   value="{{ $updateRequestName }}" autocomplete="off">
+                            <input type="text" name="request[update_name]" id="controller_name" class="form-control"
+                                   value="{{ old('request.update_name',$updateRequestName) }}" autocomplete="off">
                             <span class="input-group-text bg-light">{{ $updateRequestSuffix }}</span>
                         </div>
-                        <input type="hidden" name="request[update][prefix]" value="{{ $updateRequestPrefix  }}">
-                        <input type="hidden" name="request[update][suffix]" value="{{ $updateRequestSuffix  }}">
+                        <input type="hidden" name="request[update_prefix]" value="{{ old('request.update_prefix', $updateRequestPrefix)  }}">
+                        <input type="hidden" name="request[update_suffix]" value="{{ old('request.update_suffix', $updateRequestSuffix)  }}">
                         @error('request.update.name')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -99,8 +103,8 @@
 
             <!-- Model -->
             <div class="mb-3">
-                <label class="form-label" for="model">Crud Type</label>
-                <select name="crud[type]" id="model"
+                <label class="form-label" for="crud_type">Crud Type</label>
+                <select name="crud[type]" id="crud_type"
                         class="form-select">
                     <option value="">Select type</option>
 
@@ -111,10 +115,7 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </select>
-                <!-- Model namespace -->
-                <input type="hidden" name="model[namespace]" value="{{ $modelNamespace }}">
-
-                @error('model.name')
+                @error('crud.type')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
