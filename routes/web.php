@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Advanced\CrudController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Builders\MigrationBuilderController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
@@ -9,8 +9,14 @@ use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateControl
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ServiceGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\MainController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class)->name('generator.index');
+
+Route::prefix('/advanced')->as('advanced.')->group(function() {
+    Route::get('crud', [CrudController::class, 'create'])->name('crud');
+    Route::post('crud', [CrudController::class, 'store'])->name('crud.store');
+});
 
 Route::prefix('/generate')->group(function() {
     Route::post('models', ModelGenerateController::class)->name('models.store');

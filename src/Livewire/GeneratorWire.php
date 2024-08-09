@@ -3,7 +3,7 @@
 namespace Uzinfocom\LaravelGenerator\Livewire;
 
 use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -16,7 +16,7 @@ class GeneratorWire extends Component {
         'description' => "Servis yaratuvchi",
         'route' => "services.store"
     ];
-    private string $view = "livewire.generator";
+    protected string $view = "livewire.generator";
 
     public string $modelNamespace = "";
     public string $modelName = "";
@@ -27,9 +27,9 @@ class GeneratorWire extends Component {
 
     public bool $hasError = false;
 
-    private readonly Collection $models;
+    protected readonly Collection $models;
 
-    public function boot(ModelFinderService $modelFinder): void {
+    public function boot(EntityFinderService $modelFinder): void {
         $this->models = $this->getModels($modelFinder);
     }
 
@@ -57,16 +57,19 @@ class GeneratorWire extends Component {
         $this->hasError = $this->namespace != preg_replace('#\\\\+#', '\\', $this->namespace);
     }
 
-    private function getModels(ModelFinderService $modelFinder): Collection {
+    private function getModels(EntityFinderService $modelFinder): Collection {
         return collect($modelFinder->getModels(app_path()))->map(function($model) {
+            $name = Str::afterLast($model, "\\");
+            $folder = Str::after(Str::before($model, $name), "App\Models\\");
             return (object)[
-                'name' => Str::afterLast($model, "\\"),
+                'name' => $name,
+                'folder' => $folder,
                 'namespace' => $model
             ];
         });
     }
 
-    public function getControllers(ModelFinderService $controllerFinder): Collection {
+    public function getControllers(EntityFinderService $controllerFinder): Collection {
         return collect($controllerFinder->getControllers(app_path()))->map(function($controller) {
             return (object)[
                 'name' => Str::afterLast($controller, "\\"),

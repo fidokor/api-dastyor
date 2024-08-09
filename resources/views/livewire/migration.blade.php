@@ -43,8 +43,10 @@
                     <thead class="table-light">
                         <tr>
                             <th>Ustun nomi</th>
-                            <th>Turi</th>
-                            <th>Uzinligi</th>
+                            <th>Ustun turi</th>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Uzunligi</th>
+                            <th>Boshlang&#8216;ich</th>
+                            <th>Indekslangan</th>
                             <th>Bog&#8216;lanish</th>
                         </tr>
                     </thead>
@@ -63,7 +65,7 @@
                         <input name="{{$name}}[name]" id="{{$name}}[name]"
                                wire:model="columns.{{$key}}.name"
                                placeholder="Nomi"
-                               class="form-control" autocomplete="off">
+                               class="form-control" autocomplete="off" required>
                     </div>
 
                     <div class="col-xl">
@@ -80,8 +82,24 @@
                     <div class="col-xl">
                         <input name="{{$name}}[length]" id="{{$name}}[length]"
                                wire:model="columns.{{$key}}.length"
-                               placeholder="Turi"
+                               placeholder="Uzunligi"
                                class="form-control">
+                    </div>
+
+                    <div class="col-xl">
+                        <select name="{{$name}}[default]" id="{{$name}}[default]"
+                               wire:model="columns.{{$key}}.default"
+                               class="form-control">
+                            <option value="">Birlamchi</option>
+                            <option value="null">Bo&#8216;sh</option>
+                            <option value="value">Qiymat</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xl">
+                        <input type="checkbox" name="{{$name}}[index]" id="{{$name}}[index]"
+                               wire:model="columns.{{$key}}.index"
+                               placeholder="Indeks">
                     </div>
 
                     <div class="col-xl">

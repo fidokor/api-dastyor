@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Livewire\AdvancedCrudWire;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
 use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
 use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
@@ -42,6 +43,7 @@ class MainServiceProvider extends ServiceProvider {
 //        $this->offerPublishing();
 
         $this->assetsPublish();
+//        $this->registerHelper();
     }
 
     /**
@@ -72,7 +74,7 @@ class MainServiceProvider extends ServiceProvider {
         Route::group([
             'domain' => config("$this->namespace.domain", null),
             'prefix' => config("$this->namespace.path"),
-            'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
+            // 'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
             'middleware' => config("$this->namespace.middleware", 'web'),
         ], function() {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -86,6 +88,13 @@ class MainServiceProvider extends ServiceProvider {
      */
     protected function registerResources(): void {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->namespace);
+    }
+
+    /**
+     * @return void
+     */
+    public function registerHelper(): void {
+        require_once __DIR__ . '/Helpers/helper.php';
     }
 
     /**
@@ -173,6 +182,7 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
         Livewire::component(Boot::getWire("model-relation-wire"), ModelRelationWire::class);
 
+        Livewire::component(Boot::getWire("advanced-crud-wire"), AdvancedCrudWire::class);
         // Additional
         Livewire::component(Boot::getWire("migration-wire"), MigrationWire::class);
     }

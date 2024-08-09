@@ -1,0 +1,66 @@
+<?php
+
+namespace {{ namespace }};
+
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Spatie\RouteAttributes\Attributes\ApiResource;
+use Ijodkor\ApiResponse\Responses\RestResponse;
+use App\Services\{{ modelName }}Service;
+use App\Http\Requests\{{ modelName }}CreateRequest;
+use App\Http\Requests\{{ modelName }}UpdateRequest;
+use App\Http\Resources\{{ modelName }}Resource;
+
+#[ApiResource(
+    resource: '{{ modelResourceName }}'
+)]
+class {{ name }}Controller extends Controller {
+    use RestResponse;
+
+    public function __construct(
+        private readonly {{ modelName }}Service $service
+    ) {
+    }
+
+    public function index(Request $request): JsonResponse {
+        try {
+            $paginate = $request->query('paginate') ?? 12;
+            return $this->paginated({{ modelName }}Resource::collection($this->service->all($paginate)), '{{ modelNamePlural }}');
+        } catch (Exception $exception) {
+            return $this->fail(message: $exception->getMessage());
+        }
+    }
+
+    public function store({{ modelName }}CreateRequest $request): JsonResponse {
+        try {
+            $model = $this->service->create($request->validated());
+            return $this->success(['{{ modelNameSingular }}' => $model]);
+        } catch (Exception $exception) {
+            return $this->fail(message: $exception->getMessage());
+        }
+    }
+
+    public function show(int $id): JsonResponse {
+        $model = $this->service->find($id);
+        return $this->success(['{{ modelNameSingular }}' => {{ modelName }}Resource::make($model)]);
+    }
+
+    public function update({{ modelName }}UpdateRequest $request, string $id): JsonResponse {
+        try {
+            $model = $this->service->update($id, $request->validated());
+            return $this->success(['{{ modelNameSingular }}' => $model]);
+        } catch (Exception $exception) {
+            return $this->fail(message: $exception->getMessage());
+        }
+    }
+
+    public function destroy(int $id): JsonResponse {
+       try {
+            $this->service->delete($id);
+            return $this->success();
+        } catch (Exception $exception) {
+            return $this->fail(message: $exception->getMessage());
+        }
+    }
+}
