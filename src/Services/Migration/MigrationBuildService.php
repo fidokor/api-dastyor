@@ -2,13 +2,19 @@
 
 namespace Uzinfocom\LaravelGenerator\Services\Migration;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Uzinfocom\LaravelGenerator\Services\AllGenerator;
 
 class MigrationBuildService extends AllGenerator {
 
+    private readonly AdvancedMigrationCreator $creator;
+
     public function __construct() {
         $this->stab = 'migrations/migration.stub';
-        $this->group = "migration.php";
+        $this->group = "";
+
+        $this->creator = new AdvancedMigrationCreator(new Filesystem(), '');
     }
 
     public function create(array $data): void {
@@ -35,13 +41,29 @@ class MigrationBuildService extends AllGenerator {
         $location = $this->resolvePath($namespace);
 
         // Make ready boilerplate as Service $namespace/$name
-        $this->make($location, $name, $content);
+        $this->make($location, $this->creator->getExtendedPath($name), $content);
     }
 
     private function getColumns(array $columns): string {
-        $columnsStack = "\r\t";
+        $columnsStack = "";
         foreach ($columns as $column) {
-            $columnsStack .= "\$table->{$column['type']}('{$column['type']}');\n";
+            if (Arr::get($column, 'relation')) {
+                $this->stab = "migrations/column.related.stub";
+            } else {
+                $this->stab = "migrations/column.stub";
+            }
+
+            $boilerplate = $this->getStub();
+
+            $columnsStack .= str_replace([
+                '{{ columnType }}',
+                '{{ columnName }}',
+                '{{ tableName }}',
+            ], [
+                $column['type'],
+                $column['name'],
+                $column['relation'],
+            ], $boilerplate);;
         }
 
         return $columnsStack;
