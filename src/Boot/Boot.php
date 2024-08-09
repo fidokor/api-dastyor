@@ -3,6 +3,7 @@
 namespace Uzinfocom\LaravelGenerator\Boot;
 
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\HtmlString;
 
 class Boot {
@@ -29,6 +30,11 @@ class Boot {
         return $wire;
     }
 
+    public static function getFromJson(string $filename) {
+        $data = File::get($filename);
+        return json_decode($data, true);
+    }
+
     public static function css(): HtmlString {
         $files = [
             "css/tabler-icons.css",
@@ -47,6 +53,7 @@ class Boot {
     public static function js(): HtmlString {
         $files = [
             "js/jquery.js",
+            "js/bootstrap.js",
         ];
         $scripts = [];
         foreach ($files as $file) {

@@ -24,5 +24,9 @@
         <div class="col-4">
             <livewire:method-wire/>
         </div>
+
+        <div class="col-4">
+            <livewire:model-relation-wire/>
+        </div>
     </div>
 @endsection

@@ -4,9 +4,10 @@ namespace Uzinfocom\LaravelGenerator\Livewire;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Models\ColumnType;
 use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\TableFinderService;
 
 class MigrationWire extends GeneratorWire {
 
@@ -22,21 +23,27 @@ class MigrationWire extends GeneratorWire {
     public string $namespace = "database\migrations";
 
     public Collection $columns;
+    public Collection $tables;
 
     public Collection $types;
 
     public function __construct() {
         $this->columns = collect();
         $this->types = collect();
-
-        // Types
-        $types = File::get(Boot::getDatabase("data-types.json"));
-        foreach (json_decode($types) as $type) {
-            $this->types->push($type);
-        }
     }
 
-    public function boot(EntityFinderService $modelFinder): void { }
+    public function boot(EntityFinderService $modelFinder, TableFinderService $tableFinder = null): void {
+        // Tables
+        $this->tables = $tableFinder->getMigratedTables();
+
+        // Types
+        $this->types = collect();
+        $types = Boot::getFromJson(Boot::getDatabase("data-types.json"));
+
+        foreach ($types as $type) {
+            $this->types->push(new ColumnType($type));
+        }
+    }
 
     public function choose(): void {
         if (!isset($this->tableName)) {
@@ -47,7 +54,8 @@ class MigrationWire extends GeneratorWire {
 
     public function render(): View {
         $columns = $this->columns;
-        return view(Boot::getView('livewire.migration'), compact('columns'));
+        $tables = $this->tables;
+        return view(Boot::getView('livewire.migration'), compact('columns', 'tables'));
     }
 
     /*** Custom methods ***/

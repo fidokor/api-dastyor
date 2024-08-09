@@ -2,6 +2,7 @@
 
 namespace Uzinfocom\LaravelGenerator\Http\Controllers\Builders;
 
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
@@ -20,8 +21,12 @@ class MigrationBuilderController extends Controller {
     }
 
     public function store(MigrationMakeRequest $request): RedirectResponse {
-        $this->service->create($request->validated());
+        try {
+            $this->service->create($request->validated());
 
-        return redirect()->back();
+            return redirect()->back();
+        } catch (Exception $ex) {
+            dd($ex);
+        }
     }
 }

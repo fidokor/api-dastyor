@@ -1,0 +1,4 @@
+
+    public function {{ relationName }}(): {{ returnType }} {
+       return $this->{{ relationType }}({{ relatedModel }}::class, '{{ foreignKey }}', '{{ ownKey }}');
+    }

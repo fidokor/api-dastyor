@@ -1,0 +1,2 @@
+            $table->{{ columnType }}('{{ columnName }}')
+                ->constrained('tableName');
