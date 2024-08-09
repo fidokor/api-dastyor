@@ -1,6 +1,7 @@
 <?php
 
 use Uzinfocom\LaravelGenerator\Http\Controllers\Advanced\CrudController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Builders\MigrationBuilderController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
