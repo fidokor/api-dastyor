@@ -3,8 +3,6 @@
 namespace Uzinfocom\LaravelGenerator\Services;
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
-use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 
 class GenerateModel extends AllGenerator {
 

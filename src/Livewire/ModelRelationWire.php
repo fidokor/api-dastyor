@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
-use Uzinfocom\LaravelGenerator\Services\Utils\ModelFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
 
 class ModelRelationWire extends GeneratorWire {
     use StorageManager;
@@ -31,9 +31,9 @@ class ModelRelationWire extends GeneratorWire {
     ];
     const RELATION_TYPE_BELONGS = 'belongs';
     const RELATION_TYPE_HAS = 'has';
-    private readonly Collection $models;
+    protected readonly Collection $models;
 
-    public function boot(ModelFinderService $modelFinder): void {
+    public function boot(EntityFinderService $modelFinder): void {
         $this->models = collect($modelFinder->getModels(app_path()))->map(function($model) {
             return (object)[
                 'name' => Str::afterLast($model, "\\"),
