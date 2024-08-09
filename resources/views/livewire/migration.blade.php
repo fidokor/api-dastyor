@@ -16,7 +16,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="scheme" class="form-label">Sxema nomi</label>
-                        <select type="text" name="scheme" id="scheme" class="form-control">
+                        <select type="text" name="scheme" id="scheme" class="form-select">
                             <option value="">Sxemani tanlang</option>
                         </select>
                     </div>
@@ -54,7 +54,6 @@
             </div>
 
             <div class="mb-3"></div>
-
             @foreach($columns as $key => $column)
                 @php
                     $name = "columns[$key]";
@@ -62,7 +61,7 @@
 
                 <div class="row mb-3">
                     <div class="col-xl">
-                        <input name="{{$name}}[name]" id="{{$name}}[name]"
+                        <input type="text" name="{{$name}}[name]" id="{{$name}}[name]"
                                wire:model="columns.{{$key}}.name"
                                placeholder="Nomi"
                                class="form-control" autocomplete="off" required>
@@ -80,7 +79,7 @@
                     </div>
 
                     <div class="col-xl">
-                        <input name="{{$name}}[length]" id="{{$name}}[length]"
+                        <input type="number" name="{{$name}}[length]" id="{{$name}}[length]"
                                wire:model="columns.{{$key}}.length"
                                placeholder="Uzunligi"
                                class="form-control">
@@ -88,10 +87,10 @@
 
                     <div class="col-xl">
                         <select name="{{$name}}[default]" id="{{$name}}[default]"
-                               wire:model="columns.{{$key}}.default"
-                               class="form-control">
+                                wire:model="columns.{{$key}}.default"
+                                class="form-select">
                             <option value="">Birlamchi</option>
-                            <option value="null">Bo&#8216;sh</option>
+                            <option value="null">Bo&#8216;sh (null)</option>
                             <option value="value">Qiymat</option>
                         </select>
                     </div>
@@ -103,10 +102,14 @@
                     </div>
 
                     <div class="col-xl">
-                        <input name="{{$name}}[auto]" id="{{$name}}[auto]"
-                               wire:model="columns.{{$key}}.auto"
-                               placeholder="Nomi"
-                               class="form-control">
+                        <select name="{{$name}}[relation]" id="{{$name}}[relation]"
+                                wire:model="columns.{{$key}}.relation"
+                                class="form-select">
+                            <option value="">Jadvalni tanlang</option>
+                            @foreach($tables as $table)
+                                <option value="{{ $table->name }}">{{ $table->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             @endforeach

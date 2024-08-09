@@ -14,6 +14,9 @@ class MigrationMakeRequest extends FormRequest {
             'name' => 'required|string|between:2,255',
             'columns.*.name' => 'required|string',
             'columns.*.type' => 'required|string',
+            'columns.*.default' => 'string|nullable',
+            'columns.*.index' => 'boolean|nullable',
+            'columns.*.relation' => 'string|nullable',
             'namespace' => 'string|nullable'
         ];
     }
