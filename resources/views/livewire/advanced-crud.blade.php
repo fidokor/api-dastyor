@@ -13,21 +13,19 @@
             <!-- Model -->
             <div class="mb-3">
                 <label class="form-label" for="model">Model Name</label>
-                <select wire:model="modelNamespace" wire:click="modelChoose" name="model[name]" id="model"
+                <select wire:model="model" wire:click="modelChoose" name="model" id="model"
                         class="form-select">
                     <option value="">Select model</option>
                     @foreach($models as $model)
                         <option value="{{ $model->namespace }}"
-                            {{ $model->namespace == old('model.name')? 'selected' : '' }} >
+                            {{ $model->namespace == old('model.namespace')? 'selected' : '' }} >
                             {{ $model->name }} ({{ $model->namespace }})
                         </option>
                     @endforeach
-                    @error('model.name')
+                    @error('model')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </select>
-                <!-- Model namespace -->
-                <input type="hidden" name="model[namespace]" value="{{ $modelNamespace }}">
 
                 @error('model.name')
                 <div class="text-danger">{{ $message }}</div>
@@ -63,8 +61,10 @@
                             <span class="input-group-text bg-light">{{ $createRequestSuffix }}</span>
                         </div>
                         <!-- Create Request Namespace -->
-                        <input type="hidden" name="request[create_prefix]" value="{{ old('request.create_prefix', $createRequestPrefix)  }}">
-                        <input type="hidden" name="request[create_suffix]" value="{{ old('request.create_suffix', $createRequestSuffix)  }}">
+                        <input type="hidden" name="request[create_prefix]"
+                               value="{{ old('request.create_prefix', $createRequestPrefix)  }}">
+                        <input type="hidden" name="request[create_suffix]"
+                               value="{{ old('request.create_suffix', $createRequestSuffix)  }}">
                         @error('request.create.name')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -80,8 +80,10 @@
                                    value="{{ old('request.update_name',$updateRequestName) }}" autocomplete="off">
                             <span class="input-group-text bg-light">{{ $updateRequestSuffix }}</span>
                         </div>
-                        <input type="hidden" name="request[update_prefix]" value="{{ old('request.update_prefix', $updateRequestPrefix)  }}">
-                        <input type="hidden" name="request[update_suffix]" value="{{ old('request.update_suffix', $updateRequestSuffix)  }}">
+                        <input type="hidden" name="request[update_prefix]"
+                               value="{{ old('request.update_prefix', $updateRequestPrefix)  }}">
+                        <input type="hidden" name="request[update_suffix]"
+                               value="{{ old('request.update_suffix', $updateRequestSuffix)  }}">
                         @error('request.update.name')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror

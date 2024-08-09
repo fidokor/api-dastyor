@@ -42,7 +42,7 @@ class MainServiceProvider extends ServiceProvider {
 //        $this->offerPublishing();
 
         $this->assetsPublish();
-//        $this->registerHelper();
+        $this->registerHelper();
     }
 
     /**

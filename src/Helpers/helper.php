@@ -5,3 +5,10 @@ if (!function_exists('customHelper')) {
         dd($param);
     }
 }
+
+if (!function_exists('getModelNameFromModel')) {
+    function getModelNameFromModel($path) {
+        $path = explode('\\', $path);
+        return end($path);
+    }
+}
