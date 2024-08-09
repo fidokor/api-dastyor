@@ -1,4 +1,0 @@
-
-    public function {{ relationName }}(): BelongsTo {
-       return $this->belongsTo({{ relatedModel }}::class, '{{ foreignKey }}', '{{ ownKey }}');
-    }
