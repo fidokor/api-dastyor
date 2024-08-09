@@ -12,7 +12,7 @@ readonly class Generator {
         private GenerateRequest    $request,
         private GenerateController $controller,
         private GenerateMethod     $method,
-        private GenerateRoute      $generateRoute,
+        private GenerateRoute      $generateRoute
     ) {
     }
 

@@ -10,6 +10,7 @@ use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
 use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
 use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
+use Uzinfocom\LaravelGenerator\Livewire\ModelRelationWire;
 use Uzinfocom\LaravelGenerator\Livewire\ModelWire;
 use Uzinfocom\LaravelGenerator\Livewire\RequestWire;
 use Uzinfocom\LaravelGenerator\Livewire\ResourceWire;
@@ -170,6 +171,7 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("request-wire"), RequestWire::class);
         Livewire::component(Boot::getWire("service-wire"), ServiceWire::class);
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
+        Livewire::component(Boot::getWire("model-relation-wire"), ModelRelationWire::class);
 
         // Additional
         Livewire::component(Boot::getWire("migration-wire"), MigrationWire::class);
