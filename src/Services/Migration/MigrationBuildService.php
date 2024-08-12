@@ -2,19 +2,13 @@
 
 namespace Uzinfocom\LaravelGenerator\Services\Migration;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Arr;
 use Uzinfocom\LaravelGenerator\Services\AllGenerator;
 
 class MigrationBuildService extends AllGenerator {
 
-    private readonly AdvancedMigrationCreator $creator;
-
     public function __construct() {
         $this->stab = 'migrations/migration.stub';
-        $this->group = "";
-
-        $this->creator = new AdvancedMigrationCreator(new Filesystem(), '');
+        $this->group = "_table.php";
     }
 
     public function create(array $data): void {
@@ -28,44 +22,62 @@ class MigrationBuildService extends AllGenerator {
         // Columns
         $columns = $this->getColumns($data['columns']);
 
+        $softDelete = $data['softDelete'] ? '$table->softDeletes();' : null;
+
         $content = str_replace([
             '{{ tableName }}',
-            '{{ columns }}'
+            '{{ columns }}',
+            '{{ softDelete }}',
         ], [
             $name,
             $columns,
-            $namespace,
+            $softDelete,
         ], $boilerplate);
+
 
         // Make a director if it does not exist
         $location = $this->resolvePath($namespace);
 
+        $fileName = now()->format('Y_m_d_His') . '_create_' . $data['name'];
+
         // Make ready boilerplate as Service $namespace/$name
-        $this->make($location, $this->creator->getExtendedPath($name), $content);
+        $this->make($location, $fileName, $content);
     }
 
-    private function getColumns(array $columns): string {
-        $columnsStack = "";
+    private function getColumns($columns): string {
+        $columnDefinitions = [];
+
         foreach ($columns as $column) {
-            if (Arr::get($column, 'relation')) {
-                $this->stab = "migrations/column.related.stub";
-            } else {
-                $this->stab = "migrations/column.stub";
+            $columnType = $column['type'];
+            $columnName = $column['name'];
+            $columnLength = $column['length'];
+            $columnDefault = $column['default'];
+            $isIndex = $column['index'] ? '->index()' : '';
+            $isNullable = $column['nullable'] ? '->nullable()' : '';
+
+            // Build the column definition
+            $columnDefinition = "\$table->{$columnType}('{$columnName}'";
+
+            // Append length for string types
+            if ($columnType === 'string' && !empty($columnLength)) {
+                $columnDefinition .= ", {$columnLength}";
             }
 
-            $boilerplate = $this->getStub();
+            // Append default value if provided
+            if (!empty($columnDefault)) {
+                $columnDefinition .= ")->default('{$columnDefault}')";
+            } else {
+                $columnDefinition .= ")";
+            }
 
-            $columnsStack .= str_replace([
-                '{{ columnType }}',
-                '{{ columnName }}',
-                '{{ tableName }}',
-            ], [
-                $column['type'],
-                $column['name'],
-                $column['relation'],
-            ], $boilerplate);;
+            // Add index and nullable options
+            $columnDefinition .= $isIndex . $isNullable . ";\n";
+
+            // Collect the column definitions
+            $columnDefinitions[] = $columnDefinition;
         }
 
-        return $columnsStack;
+        // Combine all column definitions into a single string with desired formatting
+        return "\r\t\t\t" . implode('', $columnDefinitions);
     }
 }
