@@ -12,6 +12,7 @@ return new class extends Migration {
         Schema::create('{{ tableName }}', function(Blueprint $table) {
             $table->id();
             {{ columns }}
+            {{ softDelete }}
             $table->timestamps();
         });
     }

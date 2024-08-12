@@ -1,121 +1,86 @@
 [
-  {
-    "name": "string",
-    "defaults": [
-      ""
-    ]
-  },
-  {
-    "name": "tinyInteger",
-    "defaults": [
-      0
-    ]
-  },
-  {
-    "name": "boolean",
-    "defaults": [
-      true,
-      false
-    ]
-  },
-  {
-    "name": "bigInteger",
-    "defaults": []
-  },
-  {
-    "name": "binary",
-    "defaults": []
-  },
-  {
-    "name": "char",
-    "defaults": []
-  },
-  {
-    "name": "dateTime",
-    "defaults": []
-  },
-  {
-    "name": "date",
-    "defaults": []
-  },
-  {
-    "name": "decimal",
-    "defaults": []
-  },
-  {
-    "name": "double",
-    "defaults": []
-  },
-  {
-    "name": "enum",
-    "defaults": []
-  },
-  {
-    "name": "float",
-    "defaults": []
-  },
-  {
-    "name": "foreignId",
-    "defaults": []
-  },
-  {
-    "name": "integer",
-    "defaults": []
-  },
-  {
-    "name": "ipAddress",
-    "defaults": []
-  },
-  {
-    "name": "json",
-    "defaults": []
-  },
-  {
-    "name": "jsonb",
-    "defaults": []
-  },
-  {
-    "name": "macAddress",
-    "defaults": []
-  },
-  {
-    "name": "smallInteger",
-    "defaults": []
-  },
-  {
-    "name": "softDeletes",
-    "defaults": []
-  },
-  {
-    "name": "text",
-    "defaults": []
-  },
-  {
-    "name": "time",
-    "defaults": []
-  },
-  {
-    "name": "timestamp",
-    "defaults": []
-  },
-  {
-    "name": "tinyInteger",
-    "defaults": []
-  },
-  {
-    "name": "unsignedBigInteger",
-    "defaults": []
-  },
-  {
-    "name": "unsignedInteger",
-    "defaults": []
-  },
-  {
-    "name": "uuid",
-    "defaults": []
-  },
-  {
-    "name": "year",
-    "defaults": []
-  }
+    {
+        "name": "string"
+    },
+    {
+        "name": "tinyInteger"
+    },
+    {
+        "name": "boolean"
+    },
+    {
+        "name": "bigInteger"
+    },
+    {
+        "name": "binary"
+    },
+    {
+        "name": "char"
+    },
+    {
+        "name": "dateTime"
+    },
+    {
+        "name": "date"
+    },
+    {
+        "name": "decimal"
+    },
+    {
+        "name": "double"
+    },
+    {
+        "name": "enum"
+    },
+    {
+        "name": "float"
+    },
+    {
+        "name": "foreignId"
+    },
+    {
+        "name": "integer"
+    },
+    {
+        "name": "ipAddress"
+    },
+    {
+        "name": "json"
+    },
+    {
+        "name": "jsonb"
+    },
+    {
+        "name": "macAddress"
+    },
+    {
+        "name": "smallInteger"
+    },
+    {
+        "name": "softDeletes"
+    },
+    {
+        "name": "text"
+    },
+    {
+        "name": "time"
+    },
+    {
+        "name": "timestamp"
+    },
+    {
+        "name": "tinyInteger"
+    },
+    {
+        "name": "unsignedBigInteger"
+    },
+    {
+        "name": "unsignedInteger"
+    },
+    {
+        "name": "uuid"
+    },
+    {
+        "name": "year"
+    }
 ]
