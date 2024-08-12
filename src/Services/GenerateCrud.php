@@ -10,46 +10,38 @@ class GenerateCrud extends AllGenerator {
 
     public function __construct() {
         $this->stab = 'advanced-controller.stub';
-        $this->group = "Controller.php";
+        $this->group = ".php";
     }
 
-    public function generate(array $attributes): void {
+    public function generate(array $form): void {
+        $modelName = Str::afterLast($form['model'], '\\');
+        $modelInfo = ['name' => $modelName,'namespace' => $form['model']];
+        $namespace = Str::beforeLast(($form['controllerPrefix'] . $form['controllerName']), '\\');
+        $controllerName = Str::afterLast($form['controllerName'], '\\') . $form['controllerSuffix'];
 
-        $model = Arr::get($attributes, 'model');
-        customHelper('asd');
-        $modelName = getModelNameFromModel($model);
-        dd($modelName);
+        // create request
+        $createRequest = Str::afterLast($form['createRequestName'], '\\') . $form['createRequestSuffix'];
+        $useCreateRequest = Str::beforeLast($form['createRequestName'], '\\') . '\\' . $createRequest;
+        $this->requestCreateGenerate($form, $modelInfo);
 
-        $baseController = Arr::get($attributes, 'controller.base');
-        $controllerPrefix = Arr::get($attributes, 'controller.prefix');
-        $controllerName = Arr::get($attributes, 'controller.name');
-        $controllerSuffix = Arr::get($attributes, 'controller.suffix');
+        // update request
+        $updateRequest = Str::afterLast($form['updateRequestName'], '\\') . $form['updateRequestSuffix'];
+        $useUpdateRequest = Str::beforeLast($form['updateRequestName'], '\\') . '\\' . $updateRequest;
+        $this->requestUpdateGenerate($form, $modelInfo);
 
-        $createRequestPrefix = Arr::get($attributes, 'request.create.prefix');
-        $createRequestName = Arr::get($attributes, 'request.create.name');
-        $createRequestSuffix = Arr::get($attributes, 'request.create.suffix');
+        // service
+        $serviceName = Str::afterLast($form['serviceName'], '\\') . $form['serviceSuffix'];
+        $useService = Str::beforeLast($form['serviceName'], '\\') . '\\' . $serviceName;
+        $this->serviceGenerate($form, $modelInfo);
 
-        $updateRequestPrefix = Arr::get($attributes, 'request.update.prefix');
-        $updateRequestName = Arr::get($attributes, 'request.update.name');
-        $updateRequestSuffix = Arr::get($attributes, 'request.update.suffix');
+        // resource
+        $resourceName = Str::afterLast($form['resourceName'], '\\') . $form['resourceSuffix'];
+        $useResource = Str::beforeLast($form['resourceName'], '\\') . '\\' . $resourceName;
+        $this->resourceGenerate($form, $modelInfo);
 
-
-        $modelName = Arr::get($model, 'name');
-
-        $path = $namespace . '\\' . $name;
-        $name = Str::afterLast($name, '\\');
-        $namespace = Str::beforeLast($path, '\\');
-        $controllerNamespace = '';
-        if ($namespace != 'App\Http\Controllers\\') {
-            $controllerNamespace = 'App\Http\Controllers\Controller';
-        }
-        // need add check file is exist
-
-        // Model
-        // $modelName = $model['name'];
-        $modelNamePlural = Str::plural(Str::lcfirst($modelName));
         $modelNameSingular = Str::lcfirst($modelName);
-        $modelResourceName = Str::lower(preg_replace('/([a-z])([A-Z])/', '$1-$2', Str::plural($modelName)));
+        $modelNamePlural = Str::plural($modelNameSingular);
+        $modelResourceName = Str::kebab($modelNamePlural);
 
         /* @var Model $entity */
         // Read boilerplate from storage
@@ -57,24 +49,76 @@ class GenerateCrud extends AllGenerator {
 
         $content = str_replace([
             '{{ namespace }}',
-            '{{ name }}',
+            '{{ controllerName }}',
             '{{ modelName }}',
             '{{ modelNamePlural }}',
             '{{ modelNameSingular }}',
             '{{ modelResourceName }}',
+            '{{ createRequest }}',
+            '{{ useCreateRequest }}',
+            '{{ updateRequest }}',
+            '{{ useUpdateRequest }}',
+            '{{ serviceName }}',
+            '{{ useService }}',
+            '{{ resourceName }}',
+            '{{ useResource }}'
         ], [
             $namespace,
-            $name,
+            $controllerName,
             $modelName,
             $modelNamePlural,
             $modelNameSingular,
             $modelResourceName,
+            $createRequest,
+            $useCreateRequest,
+            $updateRequest,
+            $useUpdateRequest,
+            $serviceName,
+            $useService,
+            $resourceName,
+            $useResource
         ], $stub);
 
         // Make a director if it does not exist
         $location = $this->resolvePath($namespace);
 
-        // Make ready boilerplate as Service $namespace/$name
-        $this->make($location, $name, $content);
+        // Make ready boilerplate as Service $namespace/$controllerName
+        $this->make($location, $controllerName, $content);
+    }
+
+    private function serviceGenerate(array $form, array $modelInfo): void {
+        $generator = new ServiceGenerator();
+        $generator->generate(
+            $modelInfo,
+            Str::afterLast($form['serviceName'], '\\'),
+            $form['servicePrefix'] . Str::beforeLast($form['serviceName'], '\\')
+        );
+    }
+
+    private function resourceGenerate(array $form, array $modelInfo): void {
+        $generator = new GenerateResource();
+        $generator->generate(
+            $modelInfo,
+            Str::afterLast($form['resourceName'], '\\'),
+            $form['resourcePrefix'] . Str::beforeLast($form['resourceName'], '\\')
+        );
+    }
+
+    private function requestCreateGenerate(array $form, array $modelInfo): void {
+        $generator = new GenerateRequest();
+        $generator->generateCreate(
+            $modelInfo,
+            Str::afterLast($form['createRequestName'], '\\'),
+            $form['createRequestPrefix'] . Str::beforeLast($form['createRequestName'], '\\')
+        );
+    }
+
+    private function requestUpdateGenerate(array $form, array $modelInfo): void {
+        $generator = new GenerateRequest();
+        $generator->generateUpdate(
+            $modelInfo,
+            Str::afterLast($form['updateRequestName'], '\\'),
+            $form['updateRequestPrefix'] . Str::beforeLast($form['updateRequestName'], '\\')
+        );
     }
 }

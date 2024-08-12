@@ -3,7 +3,12 @@
 namespace Uzinfocom\LaravelGenerator\Livewire;
 
 
+use Uzinfocom\LaravelGenerator\Livewire\Form\AdvancedCrudForm;
+use Uzinfocom\LaravelGenerator\Services\GenerateCrud;
+
 class AdvancedCrudWire extends GeneratorWire {
+
+    public AdvancedCrudForm $form;
 
     // Props
     public array $meta = [
@@ -12,38 +17,27 @@ class AdvancedCrudWire extends GeneratorWire {
     ];
 
     protected string $view = "livewire.advanced-crud";
-    public string $model;
-
-    /*** controller ***/
-
-    public string $baseController = "App\Http\Controllers\Controller";
-
-
-    public string $controllerPrefix = "App\Http\Controllers\\";
-    public string $controllerName = "";
-    public string $controllerSuffix = "Controller";
-
-    /*** create request ***/
-    public string $createRequestPrefix = "App\Http\Request\\";
-    public string $createRequestName = "";
-    public string $createRequestSuffix = "Request";
-
-    /*** update request ***/
-    public string $updateRequestPrefix = "App\Http\Request\\";
-    public string $updateRequestName = "";
-    public string $updateRequestSuffix = "Request";
 
 
     public function modelChoose(): void {
         $model = $this->models->filter(function($model) {
-            return $model->namespace == $this->model;
+            return $model->namespace == $this->form->model;
         })->first();
 
         $path = $model ? ($model->folder ? $model->folder . $model->name : $model->name) : '';
 
-        $this->controllerName = $path;
-        $this->createRequestName = $path;
-        $this->updateRequestName = $path;
+        $this->form->controllerName = $path;
+        $this->form->createRequestName = $path;
+        $this->form->updateRequestName = $path;
+        $this->form->serviceName = $path;
+        $this->form->resourceName = $path;
     }
 
+    public function preview(): void {
+        $this->form->validate();
+    }
+
+    public function save(GenerateCrud $service) {
+        $this->form->store($service);
+    }
 }
