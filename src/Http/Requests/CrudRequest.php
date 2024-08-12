@@ -12,8 +12,7 @@ class CrudRequest extends FormRequest {
 
     public function rules(): array {
         return [
-            'model.name' => 'required|string|between:2,255',
-            'model.namespace' => 'required|string|between:2,255',
+            'model' => 'required|string|between:2,255',
             // controller
             'controller.base' => 'required|string|between:2,255',
             'controller.prefix' => 'required|string|between:2,255',

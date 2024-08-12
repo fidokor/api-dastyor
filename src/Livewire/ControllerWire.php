@@ -12,4 +12,5 @@ class ControllerWire extends GeneratorWire {
 
     public string $prefix = "App\Http\Controllers\\";
     public string $namespace = "App\Http\Controllers";
+    protected string $view = "livewire.controller";
 }

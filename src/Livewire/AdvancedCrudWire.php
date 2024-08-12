@@ -2,26 +2,17 @@
 
 namespace Uzinfocom\LaravelGenerator\Livewire;
 
-use Illuminate\Contracts\View\View;
-use Uzinfocom\LaravelGenerator\Boot\Boot;
 
 class AdvancedCrudWire extends GeneratorWire {
 
     // Props
     public array $meta = [
-        'description' => "Kontroller yaratuvchi",
+        'description' => "Crud yaratuvchi",
         'route' => "advanced.crud.store"
     ];
 
     protected string $view = "livewire.advanced-crud";
-
-//    public string $prefix = "App\Http\Controllers\\";
-//    public string $suffix = "Controller";
-//    public string $namespace = "App\Http\Controllers";
-
-    public string $modelNamespace;
-    public string $modelName;
-
+    public string $model;
 
     /*** controller ***/
 
@@ -45,11 +36,10 @@ class AdvancedCrudWire extends GeneratorWire {
 
     public function modelChoose(): void {
         $model = $this->models->filter(function($model) {
-            return $model->namespace == $this->modelNamespace;
+            return $model->namespace == $this->model;
         })->first();
 
         $path = $model ? ($model->folder ? $model->folder . $model->name : $model->name) : '';
-        $this->modelNamespace = $model?->namespace ?? "";
 
         $this->controllerName = $path;
         $this->createRequestName = $path;
