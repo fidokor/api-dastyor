@@ -3,19 +3,28 @@
 namespace Uzinfocom\LaravelGenerator\Livewire;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\TableFinderService;
 
 class ModelWire extends GeneratorWire {
 
     public string $tableName;
     public string $convertedName;
+    public Collection $tables;
 
     public array $meta = [
         'description' => "Model yaratuvchi",
         'route' => "models.store"
     ];
+
+    public function boot(EntityFinderService $modelFinder, TableFinderService $tableFinder = null): void {
+        parent::boot($modelFinder);
+
+        $this->tables = $tableFinder->getMigratedTables();
+    }
 
     public string $prefix = "App\Models\\";
     public string $namespace = "App\Models";
@@ -33,9 +42,7 @@ class ModelWire extends GeneratorWire {
     }
 
     public function render(): View {
-        $tables = DB::table('migrations')
-            ->selectRaw("split_part(split_part(migration, '_create_', 2), '_table', 1) AS name, migration")
-            ->get();
+        $tables = $this->tables;
         return view(Boot::getView('livewire.model-wire'), compact('tables'));
     }
 }

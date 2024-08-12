@@ -167,6 +167,7 @@
 
             <!-- Namespace -->
             <input type="hidden" name="namespace" value="{{ $namespace }}">
+
             <button type="submit" class="btn btn-primary">Saqlash</button>
         </div>
     </form>

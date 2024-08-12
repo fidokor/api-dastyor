@@ -3,6 +3,7 @@
 namespace Uzinfocom\LaravelGenerator\Boot;
 
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\HtmlString;
 
 class Boot {
@@ -27,6 +28,11 @@ class Boot {
 
     public static function getWire(string $wire): string {
         return $wire;
+    }
+
+    public static function getFromJson(string $filename) {
+        $data = File::get($filename);
+        return json_decode($data, true);
     }
 
     public static function css(): HtmlString {

@@ -18,12 +18,6 @@ trait StorageManager {
     }
 
     public function resolvePath(?string $namespace): string {
-        //        if ($namespace) {
-        //            $path = join("\\", [$this->root, $namespace]);
-        //        } else {
-        //            $path = $this->root;
-        //        }
-
         $path = Str::camel(Str::replace('\\', '/', $namespace));
 
         // Make a directory
