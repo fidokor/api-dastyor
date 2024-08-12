@@ -1,22 +1,42 @@
 <div class="card mb-4">
-    <form action="{{ route($meta['route']) }}" method="post">
+    <form wire:submit.prevent="save" method="post">
         <div class="card-header">
             <h5 class="card-tile mb-0">
                 {{ $meta['description'] }}
             </h5>
-
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <h5 class="alert-heading mb-2">{{ session('success') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <h5 class="alert-heading mb-2">Validatsiya bo‘yicha xatoliklar!</h5>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row mt-3">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="name" class="form-label">Jadval nomi</label>
-                        <input type="text" name="name" id="name"
-                               class="form-control" autocomplete="off" required>
+                        <label for="name" class="form-label @error('name') text-danger @enderror">Jadval nomi</label>
+                        <input type="text" wire:model="name"
+                               class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="form-group">
                         <label for="scheme" class="form-label">Sxema nomi</label>
-                        <select type="text" name="scheme" id="scheme" class="form-select">
+                        <select type="text" name="scheme" id="scheme" class="form-control">
                             <option value="">Sxemani tanlang</option>
                         </select>
                     </div>
@@ -25,13 +45,24 @@
                     <br>
                     <button type="button" class="btn btn-info" wire:click="addColumn">
                         <i class="ti ti-plus"></i>
-                        <span>Qo&#8216;shish</span>
+                        <span>Qo‘shish</span>
                     </button>
+                </div>
+                <div class="col-4">
+                    <div class="form-group mt-3">
+                        <input type="checkbox" id="softDelete"
+                               wire:model="softDelete"
+                               class="form-check-input @error("softDelete") is-invalid @enderror" value="1">
+                        <label for="softDelete">Soft delete qo‘shilsinmi</label>
+                        @error("softDelete")
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             </div>
 
             <div class="alert alert-primary mt-3" role="alert">
-                <span>ID va sanalar kerak emas!</span>
+                <span>Id va sanalar kerak emas!</span>
             </div>
         </div>
 
@@ -41,88 +72,95 @@
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead class="table-light">
-                        <tr>
-                            <th>Ustun nomi</th>
-                            <th>Ustun turi</th>
-                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Uzunligi</th>
-                            <th>Boshlang&#8216;ich</th>
-                            <th>Indekslangan</th>
-                            <th>Bog&#8216;lanish</th>
-                        </tr>
+                    <tr>
+                        <th>Ustun nomi</th>
+                        <th>Ustun turi</th>
+                        <th>Uzunligi</th>
+                        <th>Boshlang‘ich (Default)</th>
+                        <th>Boshlang‘ich (Nullable)</th>
+                        <th>Indekslangan</th>
+                        <th>Bog‘lanish</th>
+                    </tr>
                     </thead>
+                    <tbody>
+                    @foreach($columns as $key => $column)
+                        @php $name = "columns[$key]"; @endphp
+                        <tr>
+                            <td>
+                                <input name="{{$name}}[name]" id="{{$name}}[name]"
+                                       wire:model="columns.{{$key}}.name"
+                                       class="form-control @error("columns.$key.name") is-invalid @enderror">
+                                @error("columns.$key.name")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <select name="{{$name}}[type]" id="{{$name}}[type]"
+                                        wire:model="columns.{{$key}}.type"
+                                        class="form-select select2 @error("columns.$key.type") is-invalid @enderror">
+                                    <option value="">Turi tanlang</option>
+                                    @foreach($types as $type)
+                                        <option value="{{ $type->name }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error("columns.$key.type")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <input name="{{$name}}[length]" id="{{$name}}[length]"
+                                       wire:model="columns.{{$key}}.length"
+                                       class="form-control @error("columns.$key.length") is-invalid @enderror">
+                                @error("columns.$key.length")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <input type="text" name="{{$name}}[default]" id="{{$name}}[default]"
+                                       wire:model="columns.{{$key}}.default"
+                                       class="form-control @error("columns.$key.default") is-invalid @enderror">
+                                @error("columns.$key.default")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <input type="checkbox" name="{{$name}}[nullable]" id="{{$name}}[nullable]"
+                                       wire:model="columns.{{$key}}.nullable" value="1"
+                                       class="form-check-input @error("columns.$key.length") is-invalid @enderror">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="{{$name}}[index]" id="{{$name}}[index]"
+                                       wire:model="columns.{{$key}}.index"
+                                       class="form-check-input @error("columns.$key.index") is-invalid @enderror">
+                                @error("columns.$key.index")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <input name="{{$name}}[auto]" id="{{$name}}[auto]" wire:model="columns.{{$key}}.auto"
+                                       class="form-control">
+                                @error("columns.$key.auto")
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
                 </table>
             </div>
 
-            <div class="mb-3"></div>
-            @foreach($columns as $key => $column)
-                @php
-                    $name = "columns[$key]";
-                @endphp
 
-                <div class="row mb-3">
-                    <div class="col-xl">
-                        <input type="text" name="{{$name}}[name]" id="{{$name}}[name]"
-                               wire:model="columns.{{$key}}.name"
-                               placeholder="Nomi"
-                               class="form-control" autocomplete="off" required>
-                    </div>
-
-                    <div class="col-xl">
-                        <select name="{{$name}}[type]" id="{{$name}}[type]"
-                                wire:model="columns.{{$key}}.type"
-                                class="form-select" required>
-                            <option value="">Turi tanlang</option>
-                            @foreach($types as $type)
-                                <option value="{{ $type->name }}">{{ $type->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xl">
-                        <input type="number" name="{{$name}}[length]" id="{{$name}}[length]"
-                               wire:model="columns.{{$key}}.length"
-                               placeholder="Uzunligi"
-                               class="form-control">
-                    </div>
-
-                    <div class="col-xl">
-                        <select name="{{$name}}[default]" id="{{$name}}[default]"
-                                wire:model="columns.{{$key}}.default"
-                                class="form-select">
-                            <option value="">Birlamchi</option>
-                            <option value="null">Bo&#8216;sh (null)</option>
-                            <option value="value">Qiymat</option>
-                        </select>
-                    </div>
-
-                    <div class="col-xl">
-                        <input type="checkbox" name="{{$name}}[index]" id="{{$name}}[index]"
-                               wire:model="columns.{{$key}}.index"
-                               placeholder="Indeks">
-                    </div>
-
-                    <div class="col-xl">
-                        <select name="{{$name}}[relation]" id="{{$name}}[relation]"
-                                wire:model="columns.{{$key}}.relation"
-                                class="form-select">
-                            <option value="">Jadvalni tanlang</option>
-                            @foreach($tables as $table)
-                                <option value="{{ $table->name }}">{{ $table->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            @endforeach
-
-            @if($this->columns->isEmpty())
-                <div class="fw-bold text-center">Ustunlar shu yerda yaratiladi!</div>
-            @endif
+            <div class="mt-3">
+                @if($this->columns->isEmpty())
+                    <div class="fw-bold text-center">Ustunlar shu yerda yaratiladi!</div>
+                @endif
+            </div>
 
             <div class="row mt-5">
                 <label class="form-label" for="package">Papka (Namespace)</label>
                 <div class="input-group mb-3">
-                    <span class="input-group-text bg-light" id="">{{ $prefix }}</span>
-                    <input type="text" name="" id="package" wire:model="package" wire:keyup="change"
+                    <span class="input-group-text bg-light">{{ $prefix }}</span>
+                    <input type="text" id="package" wire:model="package" wire:keyup="change"
                            class="form-control" placeholder="Nomi" aria-describedby="basic">
                 </div>
             </div>
