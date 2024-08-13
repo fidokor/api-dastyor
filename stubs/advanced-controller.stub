@@ -5,63 +5,81 @@ namespace {{ namespace }};
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Spatie\RouteAttributes\Attributes\ApiResource;
-use Ijodkor\ApiResponse\Responses\RestResponse;
+use Spatie\RouteAttributes\Attributes\Resource;
 use App\Services\{{ useService }};
-use App\Http\Requests\{{ useCreateRequest }};
-use App\Http\Requests\{{ useUpdateRequest }};
-use App\Http\Resources\{{ useResource }};
+use {{ modelNameSpace }};
+{{ useCreateRequest }}
+{{ useUpdateRequest }}
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 
-#[ApiResource(
-    resource: '{{ modelResourceName }}'
+#[Resource(
+    resource: '{{ modelKebabName }}'
 )]
 class {{ controllerName }} extends Controller {
-    use RestResponse;
 
     public function __construct(
         private readonly {{ serviceName }} $service
     ) {
     }
 
-    public function index(Request $request): JsonResponse {
-        try {
-            $paginate = $request->query('paginate') ?? 12;
-            return $this->paginated({{ resourceName }}::collection($this->service->all($paginate)), '{{ modelNamePlural }}');
-        } catch (Exception $exception) {
-            return $this->fail(message: $exception->getMessage());
-        }
+    public function index(Request $request): View {
+        return view('{{ modelKebabName }}.index');
     }
 
-    public function store({{ createRequest }} $request): JsonResponse {
+    public function create(): View {
+        $model = new {{ modelName }}();
+        return view('{{ modelKebabName }}.create', compact(['model']));
+    }
+
+    public function store({{ createRequest }} $request): RedirectResponse {
         try {
             $model = $this->service->create($request->validated());
-            return $this->success(['{{ modelNameSingular }}' => $model]);
+
+            return redirect()
+                    ->route('{{ modelKebabName }}.index')
+                    ->with('success_save', tr('Successfully saved'));
         } catch (Exception $exception) {
-            return $this->fail(message: $exception->getMessage());
+            return redirect()
+                ->back()
+                ->with('warning', tr('Something went wrong'));
         }
     }
 
-    public function show(int $id): JsonResponse {
+    public function show(int $id): View {
         $model = $this->service->find($id);
-        return $this->success(['{{ modelNameSingular }}' => {{ resourceName }}::make($model)]);
+        return view('{{ modelKebabName }}.show', ['model' => $model]);
     }
 
-    public function update({{ updateRequest }} $request, string $id): JsonResponse {
+    public function edit(int $id): View {
+        $model = $this->service->find($id);
+        return view('{{ modelKebabName }}.edit', ['model' => $model]);
+    }
+
+    public function update({{ updateRequest }} $request, string $id): ?RedirectResponse {
         try {
             $model = $this->service->update($id, $request->validated());
-            return $this->success(['{{ modelNameSingular }}' => $model]);
+
+            return redirect()
+                ->route('{{ modelKebabName }}.show', $model->id)
+                ->with('success_update', tr('Successfully updated'));
         } catch (Exception $exception) {
-            return $this->fail(message: $exception->getMessage());
+            return redirect()
+                    ->back()
+                    ->with('warning', tr('Something went wrong'));
         }
     }
 
-    public function destroy(int $id): JsonResponse {
+    public function destroy(int $id): RedirectResponse {
         try {
             $this->service->delete($id);
-            return $this->success();
+
+            return redirect()
+                ->route('{{ modelKebabName }}.index');
         } catch (Exception $exception) {
-            return $this->fail(message: $exception->getMessage());
+            return redirect()
+                ->back()
+                ->with('warning', tr('Something went wrong'));
         }
     }
 }
