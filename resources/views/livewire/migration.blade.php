@@ -5,14 +5,14 @@
                 {{ $meta['description'] }}
             </h5>
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible" role="alert">
+                <div class="alert alert-success alert-dismissible mt-2" role="alert">
                     <h5 class="alert-heading mb-2">{{ session('success') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                    <h5 class="alert-heading mb-2">Validatsiya bo‘yicha xatoliklar!</h5>
+                    <h5 class="alert-heading mb-2">Tekshiruv bo&#8216;yicha xatoliklar!</h5>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -47,7 +47,7 @@
                     <br>
                     <button type="button" class="btn btn-info" wire:click="addColumn">
                         <i class="ti ti-plus"></i>
-                        <span>Qo‘shish</span>
+                        <span>Qo&#8216;shish</span>
                     </button>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <input type="checkbox" id="softDelete"
                                wire:model="softDelete"
                                class="form-check-input @error("softDelete") is-invalid @enderror" value="1">
-                        <label for="softDelete">Soft delete qo‘shilsinmi</label>
+                        <label for="softDelete">Soft delete qo&#8216;shilsinmi</label>
                         @error("softDelete")
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
