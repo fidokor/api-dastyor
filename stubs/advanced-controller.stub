@@ -9,8 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Spatie\RouteAttributes\Attributes\ApiResource;
 use Ijodkor\ApiResponse\Responses\RestResponse;
 use App\Services\{{ useService }};
-use App\Http\Requests\{{ useCreateRequest }};
-use App\Http\Requests\{{ useUpdateRequest }};
+{{ useCreateRequest }}
+{{ useUpdateRequest }}
 use App\Http\Resources\{{ useResource }};
 
 #[ApiResource(

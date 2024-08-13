@@ -47,6 +47,9 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Create Request Nomi</label>
                         <div class="input-group mb-3">
+                            <span class="input-group-text bg-light">
+                                <input class="form-check-input" type="checkbox" wire:model="form.isCreateRequest" checked />
+                            </span>
                             <span class="input-group-text bg-light">{{ $form->createRequestPrefix }}</span>
                             <input type="text" wire:model="form.createRequestName" class="form-control" autocomplete="off">
                             <span class="input-group-text bg-light">{{ $form->createRequestSuffix }}</span>
@@ -63,6 +66,9 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Update Request Nomi</label>
                         <div class="input-group mb-3">
+                            <span class="input-group-text bg-light">
+                                <input class="form-check-input" type="checkbox" wire:model="form.isUpdateRequest" checked />
+                            </span>
                             <span class="input-group-text bg-light">{{ $form->updateRequestPrefix }}</span>
                             <input type="text" wire:model="form.updateRequestName" class="form-control" autocomplete="off">
                             <span class="input-group-text bg-light">{{ $form->updateRequestSuffix }}</span>

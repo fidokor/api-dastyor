@@ -95,8 +95,20 @@ class GenerateCrud extends AllGenerator {
     }
 
     private function requestCreateGenerate(array $form, array $modelInfo, &$stub): void {
-        $createRequest = Str::afterLast($form['createRequestName'], '\\') . $form['createRequestSuffix'];
-        $useCreateRequest = Str::beforeLast($form['createRequestName'], '\\') . '\\' . $createRequest;
+        if ($form['isCreateRequest']) {
+            $createRequest = (Str::afterLast($form['createRequestName'], '\\') . $form['createRequestSuffix']);
+            $useCreateRequest = 'use ' . $form['createRequestPrefix'] . Str::beforeLast($form['createRequestName'], '\\') . '\\' . $createRequest . ';';
+
+            $generator = new GenerateRequest();
+            $generator->generateCreate(
+                $modelInfo,
+                Str::afterLast($form['createRequestName'], '\\'),
+                $form['createRequestPrefix'] . Str::beforeLast($form['createRequestName'], '\\')
+            );
+        } else {
+            $createRequest = 'Request';
+            $useCreateRequest = '';
+        }
 
         $stub = str_replace([
             '{{ createRequest }}',
@@ -105,18 +117,23 @@ class GenerateCrud extends AllGenerator {
             $createRequest,
             $useCreateRequest
         ], $stub);
-
-        $generator = new GenerateRequest();
-        $generator->generateCreate(
-            $modelInfo,
-            Str::afterLast($form['createRequestName'], '\\'),
-            $form['createRequestPrefix'] . Str::beforeLast($form['createRequestName'], '\\')
-        );
     }
 
     private function requestUpdateGenerate(array $form, array $modelInfo, &$stub): void {
-        $updateRequest = Str::afterLast($form['updateRequestName'], '\\') . $form['updateRequestSuffix'];
-        $useUpdateRequest = Str::beforeLast($form['updateRequestName'], '\\') . '\\' . $updateRequest;
+        if ($form['isUpdateRequest']) {
+            $updateRequest = Str::afterLast($form['updateRequestName'], '\\') . $form['updateRequestSuffix'];
+            $useUpdateRequest = 'use ' . $form['updateRequestPrefix'] . Str::beforeLast($form['updateRequestName'], '\\') . '\\' . $updateRequest . ';';
+
+            $generator = new GenerateRequest();
+            $generator->generateUpdate(
+                $modelInfo,
+                Str::afterLast($form['updateRequestName'], '\\'),
+                $form['updateRequestPrefix'] . Str::beforeLast($form['updateRequestName'], '\\')
+            );
+        } else {
+            $updateRequest = 'Request';
+            $useUpdateRequest = '';
+        }
 
         $stub = str_replace([
             '{{ updateRequest }}',
@@ -125,12 +142,5 @@ class GenerateCrud extends AllGenerator {
             $updateRequest,
             $useUpdateRequest,
         ], $stub);
-
-        $generator = new GenerateRequest();
-        $generator->generateUpdate(
-            $modelInfo,
-            Str::afterLast($form['updateRequestName'], '\\'),
-            $form['updateRequestPrefix'] . Str::beforeLast($form['updateRequestName'], '\\')
-        );
     }
 }

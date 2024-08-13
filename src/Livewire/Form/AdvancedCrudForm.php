@@ -7,8 +7,7 @@ use Livewire\Form;
 use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
 use Uzinfocom\LaravelGenerator\Services\GenerateCrud;
 
-class AdvancedCrudForm extends Form
-{
+class AdvancedCrudForm extends Form {
     use StorageManager;
 
     #[Validate('required|string')]
@@ -28,6 +27,9 @@ class AdvancedCrudForm extends Form
     public $controllerSuffix = 'Controller';
 
     //-------------- Create Request -------------
+    #[Validate('required|boolean')]
+    public $isCreateRequest = true;
+
     #[Validate('required|string')]
     public $createRequestPrefix = 'App\Http\Requests\\';
 
@@ -38,6 +40,9 @@ class AdvancedCrudForm extends Form
     public $createRequestSuffix = 'CreateRequest';
 
     //-------------- Update Request -------------
+    #[Validate('required|boolean')]
+    public $isUpdateRequest = true;
+
     #[Validate('required|string')]
     public $updateRequestPrefix = 'App\Http\Requests\\';
 
