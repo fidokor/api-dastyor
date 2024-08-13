@@ -9,6 +9,7 @@ use Livewire\Livewire;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
 use Uzinfocom\LaravelGenerator\Livewire\AdvancedCrudWire;
 use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
+use Uzinfocom\LaravelGenerator\Livewire\EnumWire;
 use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
 use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
 use Uzinfocom\LaravelGenerator\Livewire\ModelRelationWire;
@@ -98,35 +99,14 @@ class MainServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Setup the resource publishing groups for H.
-     *
-     * @return void
-     */
-    protected function offerPublishing(): void {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../stubs/H.stub' => app_path('Providers/MainServiceProvider.php'),
-            ], "$this->namespace-provider");
-
-            $this->publishes([
-                __DIR__ . "/../config/$this->namespace.php" => config_path("$this->namespace.php"),
-            ], "$this->namespace-config");
-        }
-    }
-
-    /**
      * Register the H Artisan commands.
      *
      * @return void
      */
     protected function registerCommands(): void {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-
-            ]);
+            $this->commands([]);
         }
-
-//        $this->commands([Console\SnapshotCommand::class]);
     }
 
     /**
@@ -139,12 +119,7 @@ class MainServiceProvider extends ServiceProvider {
             define('HORIZON_PATH', realpath(__DIR__ . '/../'));
         }
 
-//        $this->app->bind(Console\WorkCommand::class, function($app) {
-//            return new Console\WorkCommand($app['queue.worker'], $app['cache.store']);
-//        });
-
         $this->configure();
-//        $this->registerServices();
     }
 
     /**
@@ -160,18 +135,6 @@ class MainServiceProvider extends ServiceProvider {
         // H::use(config('H.use', 'default'));
     }
 
-    /**
-     * Register H's services in the container.
-     *
-     * @return void
-     */
-    protected function registerServices() {
-//        foreach ($this->serviceBindings as $key => $value) {
-//            is_numeric($key)
-//                ? $this->app->singleton($value)
-//                : $this->app->singleton($key, $value);
-//        }
-    }
 
     private function registerLiveWire(): void {
         Livewire::component(Boot::getWire("method-wire"), MethodWire::class);
@@ -181,10 +144,9 @@ class MainServiceProvider extends ServiceProvider {
         Livewire::component(Boot::getWire("service-wire"), ServiceWire::class);
         Livewire::component(Boot::getWire("resource-wire"), ResourceWire::class);
         Livewire::component(Boot::getWire("model-relation-wire"), ModelRelationWire::class);
-
         Livewire::component(Boot::getWire("advanced-crud-wire"), AdvancedCrudWire::class);
-        // Additional
         Livewire::component(Boot::getWire("migration-wire"), MigrationWire::class);
+        Livewire::component(Boot::getWire("enum-wire"), EnumWire::class);
     }
 
     private function assetsPublish(): void {
