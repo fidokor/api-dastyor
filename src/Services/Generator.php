@@ -14,6 +14,7 @@ readonly class Generator {
         private GenerateCrud       $crud,
         private GenerateMethod     $method,
         private GenerateRoute      $generateRoute,
+        private GenerateEnum $enum,
     ) {
     }
 
@@ -116,5 +117,16 @@ readonly class Generator {
         $namespace = Arr::get($attributes, 'namespace');
         $name = Arr::get($attributes, 'name');
         $this->method->generate($namespace, $name);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function generateEnum(array $attributes): void {
+        $namespace = Arr::get($attributes, 'namespace');
+        $name = Arr::get($attributes, 'name');
+        $type = Arr::get($attributes, 'type');
+        $variables = Arr::get($attributes, 'variables');
+        $this->enum->generate($namespace, $name, $type, $variables);
     }
 }

@@ -23,7 +23,7 @@
                 </select>
 
                 @error('form.model')
-                    <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -37,7 +37,22 @@
                 </div>
 
                 @error('form.controllerName')
-                    <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Controller type -->
+            <div class="mb-3">
+                <label class="form-label" for="crud_type">Resource Type</label>
+                <select wire:model="form.crudType" class="form-select">
+                    <option value="">Select type</option>
+
+                    <option value="1">Api resource controller</option>
+                    <option value="2">Resource controller</option>
+                </select>
+
+                @error('form.crudType')
+                <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -47,13 +62,18 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Create Request Nomi</label>
                         <div class="input-group mb-3">
+                            <span class="input-group-text bg-light">
+                                <input class="form-check-input" type="checkbox" wire:model="form.isCreateRequest"
+                                       checked/>
+                            </span>
                             <span class="input-group-text bg-light">{{ $form->createRequestPrefix }}</span>
-                            <input type="text" wire:model="form.createRequestName" class="form-control" autocomplete="off">
+                            <input type="text" wire:model="form.createRequestName" class="form-control"
+                                   autocomplete="off">
                             <span class="input-group-text bg-light">{{ $form->createRequestSuffix }}</span>
                         </div>
 
                         @error('form.createRequestName')
-                            <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -63,13 +83,18 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Update Request Nomi</label>
                         <div class="input-group mb-3">
+                            <span class="input-group-text bg-light">
+                                <input class="form-check-input" type="checkbox" wire:model="form.isUpdateRequest"
+                                       checked/>
+                            </span>
                             <span class="input-group-text bg-light">{{ $form->updateRequestPrefix }}</span>
-                            <input type="text" wire:model="form.updateRequestName" class="form-control" autocomplete="off">
+                            <input type="text" wire:model="form.updateRequestName" class="form-control"
+                                   autocomplete="off">
                             <span class="input-group-text bg-light">{{ $form->updateRequestSuffix }}</span>
                         </div>
 
                         @error('form.updateRequestName')
-                            <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -85,23 +110,25 @@
                 </div>
 
                 @error('form.serviceName')
-                <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Resource -->
-            <div class="mb-3">
-                <label class="form-label" for="name">Resource Name</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-light">{{ $form->resourcePrefix }}</span>
-                    <input type="text" wire:model="form.resourceName" class="form-control" autocomplete="off">
-                    <span class="input-group-text bg-light">{{ $form->resourceSuffix }}</span>
-                </div>
+            @if($form->crudType === 1)
+                <div class="mb-3">
+                    <label class="form-label" for="name">Resource Name</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-light">{{ $form->resourcePrefix }}</span>
+                        <input type="text" wire:model="form.resourceName" class="form-control" autocomplete="off">
+                        <span class="input-group-text bg-light">{{ $form->resourceSuffix }}</span>
+                    </div>
 
-                @error('form.resourceName')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+                    @error('form.resourceName')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            @endif
 
             <!-- Base Controller Name -->
             <div class="mb-3">
@@ -111,22 +138,7 @@
                 </div>
 
                 @error('form.baseController')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Model -->
-            <div class="mb-3">
-                <label class="form-label" for="crud_type">Crud Type</label>
-                <select wire:model="form.crudType" class="form-select">
-                    <option value="">Select type</option>
-
-                    <option value="1">Api uchun</option>
-                    <option value="2">Blade uchun</option>
-                </select>
-
-                @error('form.crudType')
-                    <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
