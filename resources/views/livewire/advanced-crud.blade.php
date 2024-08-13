@@ -3,32 +3,27 @@
         <h5 class="card-tile mb-0">{{ $meta['description'] }}</h5>
     </div>
     <div class="card-body">
-        <form action="{{ route($meta['route']) }}" method="post">
+        <form wire:submit="save">
             @csrf
-
-            @foreach($errors->all() as $error)
-                <div class="text-danger">{{ $error }}</div>
-            @endforeach
 
             <!-- Model -->
             <div class="mb-3">
-                <label class="form-label" for="model">Model Name</label>
-                <select wire:model="model" wire:click="modelChoose" name="model" id="model"
-                        class="form-select">
+                <label class="form-label" for="form.model">Model Name</label>
+                <select
+                    wire:model="form.model"
+                    wire:change="modelChoose()"
+                    class="form-select"
+                >
                     <option value="">Select model</option>
                     @foreach($models as $model)
-                        <option value="{{ $model->namespace }}"
-                            {{ $model->namespace == old('model.namespace')? 'selected' : '' }} >
+                        <option value="{{ $model->namespace }}">
                             {{ $model->name }} ({{ $model->namespace }})
                         </option>
                     @endforeach
-                    @error('model')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
                 </select>
 
-                @error('model.name')
-                <div class="text-danger">{{ $message }}</div>
+                @error('form.model')
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -36,16 +31,13 @@
             <div class="mb-3">
                 <label class="form-label" for="name">Controller Name</label>
                 <div class="input-group mb-3">
-                    <span class="input-group-text bg-light">{{ $controllerPrefix }}</span>
-                    <input type="text" name="controller[name]" id="controller_name" class="form-control"
-                           value="{{ old('controller.name', $controllerName) }}" autocomplete="off">
-                    <span class="input-group-text bg-light">{{ $controllerSuffix }}</span>
+                    <span class="input-group-text bg-light">{{ $form->controllerPrefix }}</span>
+                    <input type="text" wire:model="form.controllerName" class="form-control" autocomplete="off">
+                    <span class="input-group-text bg-light">{{ $form->controllerSuffix }}</span>
                 </div>
-                <!-- Controller Namespace -->
-                <input type="hidden" name="controller[prefix]" value="{{ $controllerPrefix  }}">
-                <input type="hidden" name="controller[suffix]" value="{{ $controllerSuffix  }}">
-                @error('controller.name')
-                <div class="text-danger">{{ $message }}</div>
+
+                @error('form.controllerName')
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -55,75 +47,92 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Create Request Nomi</label>
                         <div class="input-group mb-3">
-                            <span class="input-group-text bg-light">{{ $createRequestPrefix }}</span>
-                            <input type="text" name="request[create_name]" id="controller_name" class="form-control"
-                                   value="{{ old('request.create_name',$createRequestName) }}" autocomplete="off">
-                            <span class="input-group-text bg-light">{{ $createRequestSuffix }}</span>
+                            <span class="input-group-text bg-light">{{ $form->createRequestPrefix }}</span>
+                            <input type="text" wire:model="form.createRequestName" class="form-control" autocomplete="off">
+                            <span class="input-group-text bg-light">{{ $form->createRequestSuffix }}</span>
                         </div>
-                        <!-- Create Request Namespace -->
-                        <input type="hidden" name="request[create_prefix]"
-                               value="{{ old('request.create_prefix', $createRequestPrefix)  }}">
-                        <input type="hidden" name="request[create_suffix]"
-                               value="{{ old('request.create_suffix', $createRequestSuffix)  }}">
-                        @error('request.create.name')
-                        <div class="text-danger">{{ $message }}</div>
+
+                        @error('form.createRequestName')
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <!-- Update Request Name -->
                     <div class="mb-3">
                         <label class="form-label" for="name">Update Request Nomi</label>
                         <div class="input-group mb-3">
-                            <span class="input-group-text bg-light">{{ $updateRequestPrefix }}</span>
-                            <input type="text" name="request[update_name]" id="controller_name" class="form-control"
-                                   value="{{ old('request.update_name',$updateRequestName) }}" autocomplete="off">
-                            <span class="input-group-text bg-light">{{ $updateRequestSuffix }}</span>
+                            <span class="input-group-text bg-light">{{ $form->updateRequestPrefix }}</span>
+                            <input type="text" wire:model="form.updateRequestName" class="form-control" autocomplete="off">
+                            <span class="input-group-text bg-light">{{ $form->updateRequestSuffix }}</span>
                         </div>
-                        <input type="hidden" name="request[update_prefix]"
-                               value="{{ old('request.update_prefix', $updateRequestPrefix)  }}">
-                        <input type="hidden" name="request[update_suffix]"
-                               value="{{ old('request.update_suffix', $updateRequestSuffix)  }}">
-                        @error('request.update.name')
-                        <div class="text-danger">{{ $message }}</div>
+
+                        @error('form.updateRequestName')
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
+            </div>
+
+            <!-- Service Name -->
+            <div class="mb-3">
+                <label class="form-label" for="name">Service Name</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-light">{{ $form->servicePrefix }}</span>
+                    <input type="text" wire:model="form.serviceName" class="form-control" autocomplete="off">
+                    <span class="input-group-text bg-light">{{ $form->serviceSuffix }}</span>
+                </div>
+
+                @error('form.serviceName')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Resource -->
+            <div class="mb-3">
+                <label class="form-label" for="name">Resource Name</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-light">{{ $form->resourcePrefix }}</span>
+                    <input type="text" wire:model="form.resourceName" class="form-control" autocomplete="off">
+                    <span class="input-group-text bg-light">{{ $form->resourceSuffix }}</span>
+                </div>
+
+                @error('form.resourceName')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <!-- Base Controller Name -->
             <div class="mb-3">
                 <label class="form-label" for="name">Base Controller Name</label>
                 <div class="input-group mb-3">
-                    <input type="text" name="controller[base]" id="controller_name" class="form-control"
-                           value="{{ $baseController }}" autocomplete="off">
+                    <input type="text" wire:model="form.baseController" class="form-control" autocomplete="off">
                 </div>
-                @error('controller.name')
-                <div class="text-danger">{{ $message }}</div>
+
+                @error('form.baseController')
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Model -->
             <div class="mb-3">
                 <label class="form-label" for="crud_type">Crud Type</label>
-                <select name="crud[type]" id="crud_type"
-                        class="form-select">
+                <select wire:model="form.crudType" class="form-select">
                     <option value="">Select type</option>
 
                     <option value="1">Api uchun</option>
                     <option value="2">Blade uchun</option>
-
-                    @error('model.crud_type')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
                 </select>
-                @error('crud.type')
-                <div class="text-danger">{{ $message }}</div>
+
+                @error('form.crudType')
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
+            <button type="button" wire:click="preview()" class="btn btn-primary">Preview</button>
 
-            <button class="btn btn-primary @if($hasError) disabled @endif">Saqlash</button>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
         </form>
     </div>
 </div>
