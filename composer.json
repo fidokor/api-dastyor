@@ -1,6 +1,6 @@
 {
-    "name": "ijodkor/laravel-generator",
-    "description": "Laravel CRUD API generator",
+    "name": "ijodkor/api-dastyor",
+    "description": "Laravel dostyor, loyihani bir zumda qurishga yordam beradi",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,6 +11,14 @@
         {
             "name": "Dilmurod Qurbonboyev",
             "email": "qurbonboyev9820@gmail.com"
+        },
+        {
+            "name": "Azizbek Gulaliyev",
+            "email": "azizgulaliyev44@gmail.com"
+        },
+        {
+            "name": "Shuhratjon Abdurasulov",
+            "email": "abdurasulovshuhratjon1998@gmail.com"
         }
     ],
     "minimum-stability": "dev",
