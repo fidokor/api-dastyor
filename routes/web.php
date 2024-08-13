@@ -3,6 +3,7 @@
 use Uzinfocom\LaravelGenerator\Http\Controllers\Advanced\CrudController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Builders\MigrationBuilderController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
+use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\EnumGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
 use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateController;
@@ -25,6 +26,7 @@ Route::prefix('/generate')->group(function() {
     Route::post('resources', ResourceGenerateController::class)->name('resources.store');
     Route::post('controllers', ControllerGenerateController::class)->name('controllers.store');
     Route::post('methods', MethodGenerateController::class)->name('methods.store');
+    Route::post('enums', EnumGenerateController::class)->name('enums.store');
 });
 
 // Add extra
