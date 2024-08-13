@@ -1,86 +1,149 @@
 [
     {
-        "name": "string"
+        "name": "string",
+        "hasLength": true,
+        "defaults": [
+            ""
+        ]
     },
     {
-        "name": "tinyInteger"
+        "name": "tinyInteger",
+        "hasLength": true,
+        "defaults": [
+            0
+        ]
     },
     {
-        "name": "boolean"
+        "name": "boolean",
+        "hasLength": false,
+        "defaults": [
+            true,
+            false
+        ]
     },
     {
-        "name": "bigInteger"
+        "name": "bigInteger",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "binary"
+        "name": "binary",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "char"
+        "name": "char",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "dateTime"
+        "name": "dateTime",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "date"
+        "name": "date",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "decimal"
+        "name": "decimal",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "double"
+        "name": "double",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "enum"
+        "name": "enum",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "float"
+        "name": "float",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "foreignId"
+        "name": "foreignId",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "integer"
+        "name": "integer",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "ipAddress"
+        "name": "ipAddress",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "json"
+        "name": "json",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "jsonb"
+        "name": "jsonb",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "macAddress"
+        "name": "macAddress",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "smallInteger"
+        "name": "smallInteger",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "softDeletes"
+        "name": "softDeletes",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "text"
+        "name": "text",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "time"
+        "name": "time",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "timestamp"
+        "name": "timestamp",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "tinyInteger"
+        "name": "tinyInteger",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "unsignedBigInteger"
+        "name": "unsignedBigInteger",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "unsignedInteger"
+        "name": "unsignedInteger",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "uuid"
+        "name": "uuid",
+        "hasLength": true,
+        "defaults": []
     },
     {
-        "name": "year"
+        "name": "year",
+        "hasLength": true,
+        "defaults": []
     }
 ]

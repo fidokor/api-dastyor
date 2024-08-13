@@ -33,14 +33,16 @@
 
                     </div>
                 </div>
+
                 <div class="col-4">
                     <div class="form-group">
                         <label for="scheme" class="form-label">Sxema nomi</label>
-                        <select type="text" name="scheme" id="scheme" class="form-control">
+                        <select name="scheme" id="scheme" class="form-select">
                             <option value="">Sxemani tanlang</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="col-4">
                     <br>
                     <button type="button" class="btn btn-info" wire:click="addColumn">
@@ -48,6 +50,9 @@
                         <span>Qo‘shish</span>
                     </button>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col-4">
                     <div class="form-group mt-3">
                         <input type="checkbox" id="softDelete"
@@ -76,10 +81,10 @@
                         <th>Ustun nomi</th>
                         <th>Ustun turi</th>
                         <th>Uzunligi</th>
-                        <th>Boshlang‘ich (Default)</th>
-                        <th>Boshlang‘ich (Nullable)</th>
+                        <th>Boshlang&#8216;ich (Default)</th>
+                        <th>Boshlang&#8216;ich (Nullable)</th>
                         <th>Indekslangan</th>
-                        <th>Bog‘lanish</th>
+                        <th>Bog&#8216;lanish</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,9 +113,10 @@
                                 @enderror
                             </td>
                             <td>
-                                <input name="{{$name}}[length]" id="{{$name}}[length]"
+                                <input type="number" name="{{$name}}[length]" id="{{$name}}[length]"
                                        wire:model="columns.{{$key}}.length"
-                                       class="form-control @error("columns.$key.length") is-invalid @enderror">
+                                       class="form-control @error("columns.$key.length") is-invalid @enderror"
+                                       autocomplete="off">
                                 @error("columns.$key.length")
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -137,9 +143,15 @@
                                 @enderror
                             </td>
                             <td>
-                                <input name="{{$name}}[auto]" id="{{$name}}[auto]" wire:model="columns.{{$key}}.auto"
-                                       class="form-control">
-                                @error("columns.$key.auto")
+                                <select name="{{$name}}[constrained]" id="{{$name}}[constrained]"
+                                        wire:model="columns.{{$key}}.constrained"
+                                        class="form-select">
+                                    <option value="">Jadvalni tanlang</option>
+                                    @foreach($tables as $table)
+                                        <option value="{{ $table->name }}">{{ $table->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error("columns.$key.constrained")
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </td>

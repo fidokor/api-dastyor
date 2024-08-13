@@ -1,1 +1,1 @@
-            $table->{{ columnType }}('{{ columnName }}');
+            $table->{{ columnType }}('{{ columnName }}'){{ extra }};
