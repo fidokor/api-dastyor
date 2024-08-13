@@ -1,5 +1,5 @@
 @use(Uzinfocom\LaravelGenerator\Boot\Boot)
-<!doctype html>
+        <!doctype html>
 <html lang="{{ app()->getLocale() }}" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact">
 <head>
     <meta charset="utf-8"/>
@@ -27,6 +27,7 @@
     <div class="drag-target"></div>
 </div>
 {{ Boot::js() }}
+@stack('js')
 @livewireScripts
 </body>
 </html>
