@@ -2,8 +2,8 @@
 
 namespace Uzinfocom\LaravelGenerator\Services;
 
-use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
 use Illuminate\Support\Facades\File;
+use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
 
 class AllGenerator {
     use StorageManager;
@@ -17,9 +17,7 @@ class AllGenerator {
     }
 
     protected function overwrite(string $location, string $content): void {
-//        dd($location, $name, $content);
         $path = base_path(join("/", [$location . $this->group]));
-//        dd($path);
         File::put($path, $content);
     }
 }

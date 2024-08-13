@@ -5,14 +5,14 @@
                 {{ $meta['description'] }}
             </h5>
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible" role="alert">
+                <div class="alert alert-success alert-dismissible mt-2" role="alert">
                     <h5 class="alert-heading mb-2">{{ session('success') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                    <h5 class="alert-heading mb-2">Validatsiya bo‘yicha xatoliklar!</h5>
+                    <h5 class="alert-heading mb-2">Tekshiruv bo&#8216;yicha xatoliklar!</h5>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -33,27 +33,32 @@
 
                     </div>
                 </div>
+
                 <div class="col-4">
                     <div class="form-group">
                         <label for="scheme" class="form-label">Sxema nomi</label>
-                        <select type="text" name="scheme" id="scheme" class="form-control">
+                        <select name="scheme" id="scheme" class="form-select">
                             <option value="">Sxemani tanlang</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="col-4">
                     <br>
                     <button type="button" class="btn btn-info" wire:click="addColumn">
                         <i class="ti ti-plus"></i>
-                        <span>Qo‘shish</span>
+                        <span>Qo&#8216;shish</span>
                     </button>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col-4">
                     <div class="form-group mt-3">
                         <input type="checkbox" id="softDelete"
                                wire:model="softDelete"
                                class="form-check-input @error("softDelete") is-invalid @enderror" value="1">
-                        <label for="softDelete">Soft delete qo‘shilsinmi</label>
+                        <label for="softDelete">Soft delete qo&#8216;shilsinmi</label>
                         @error("softDelete")
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -76,10 +81,10 @@
                         <th>Ustun nomi</th>
                         <th>Ustun turi</th>
                         <th>Uzunligi</th>
-                        <th>Boshlang‘ich (Default)</th>
-                        <th>Boshlang‘ich (Nullable)</th>
+                        <th>Boshlang&#8216;ich (Default)</th>
+                        <th>Boshlang&#8216;ich (Nullable)</th>
                         <th>Indekslangan</th>
-                        <th>Bog‘lanish</th>
+                        <th>Bog&#8216;lanish</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,9 +113,10 @@
                                 @enderror
                             </td>
                             <td>
-                                <input name="{{$name}}[length]" id="{{$name}}[length]"
+                                <input type="number" name="{{$name}}[length]" id="{{$name}}[length]"
                                        wire:model="columns.{{$key}}.length"
-                                       class="form-control @error("columns.$key.length") is-invalid @enderror">
+                                       class="form-control @error("columns.$key.length") is-invalid @enderror"
+                                       autocomplete="off">
                                 @error("columns.$key.length")
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -137,9 +143,15 @@
                                 @enderror
                             </td>
                             <td>
-                                <input name="{{$name}}[auto]" id="{{$name}}[auto]" wire:model="columns.{{$key}}.auto"
-                                       class="form-control">
-                                @error("columns.$key.auto")
+                                <select name="{{$name}}[constrained]" id="{{$name}}[constrained]"
+                                        wire:model="columns.{{$key}}.constrained"
+                                        class="form-select">
+                                    <option value="">Jadvalni tanlang</option>
+                                    @foreach($tables as $table)
+                                        <option value="{{ $table->name }}">{{ $table->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error("columns.$key.constrained")
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </td>

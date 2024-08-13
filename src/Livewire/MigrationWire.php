@@ -5,10 +5,11 @@ namespace Uzinfocom\LaravelGenerator\Livewire;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\File;
 use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
+use Uzinfocom\LaravelGenerator\Models\ColumnType;
 use Uzinfocom\LaravelGenerator\Services\Migration\MigrationBuildService;
+use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
+use Uzinfocom\LaravelGenerator\Services\Utils\TableFinderService;
 
 
 class MigrationWire extends GeneratorWire {
@@ -35,23 +36,29 @@ class MigrationWire extends GeneratorWire {
         'columns.*.index' => 'required|boolean',
         'columns.*.nullable' => 'required|boolean',
         'columns.*.length' => 'nullable',
-        'columns.*.auto' => 'nullable',
+        'columns.*.constrained' => 'nullable'
     ])]
     public Collection $columns;
+
     public Collection $types;
+    public Collection $tables;
 
     public function __construct() {
         $this->columns = collect();
         $this->types = collect();
-
-        // Types
-        $types = File::get(Boot::getDatabase("data-types.json"));
-        foreach (json_decode($types) as $type) {
-            $this->types->push($type);
-        }
     }
 
-    public function boot(EntityFinderService $modelFinder): void { }
+    public function boot(EntityFinderService $modelFinder, TableFinderService $tableFinder = null): void {
+        // Tables
+        $this->tables = $tableFinder->getMigratedTables();
+
+        // Types
+        $types = Boot::getFromJson(Boot::getDatabase("data-types.json"));
+        $this->types = collect();
+        foreach ($types as $type) {
+            $this->types->push(new ColumnType($type));
+        }
+    }
 
     /*** Custom methods ***/
     public function addColumn(): void {
@@ -74,13 +81,16 @@ class MigrationWire extends GeneratorWire {
             'name' => $this->name,
             "softDelete" => $this->softDelete,
             'namespace' => $this->namespace,
-            'columns' => $this->columns
+            'columns' => $this->columns->toArray()
         ]);
-        session()->flash('success', 'Migration created successfully.');
+
+        session()->flash('success', 'Jadval quruvchi muvaffaqiyatli yaratildi!');
     }
 
     public function render(): View {
         $columns = $this->columns;
-        return view(Boot::getView('livewire.migration'), compact('columns'));
+        $tables = $this->tables;
+
+        return view(Boot::getView('livewire.migration'), compact('columns', 'tables'));
     }
 }

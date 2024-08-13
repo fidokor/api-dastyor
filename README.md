@@ -1,18 +1,17 @@
-# Laravel API Responses
+# Laravel Generator
 
-Laravel API
+Laravel Generator
 
 ## Talablar (Requirements)
 
-- PHP ^8.1
-- Laravel ^10 | ^11
+- PHP ^8.2
+- Laravel ^11
 
 ## Talqinlar mutonosibligi (Version Compatibility)
 
-| Laravel | Laravel API Response | 
-|:--------|:---------------------|
-| 10.x    | 1.x                  |
-| 11.x    | 1.2.x                |
+| Laravel | Laravel Generator | 
+|:--------|:------------------|
+| 11.x    | 1.2.x             |
 
 ## O&#8216;rnatish (Installation)
 
@@ -24,10 +23,10 @@ composer require ijodkor/laravel-api-response
 
 ## Ishlatish (Usage)
 
-Add RestResponse trait to app module Controller file or any controller which is needed
+Add 
 
 ```php
-
+php artisan vendor:publish --provider="Uzinfocom\LaravelGenerator\MainServiceProvider"
 ```
 
 # Foydalanilgan manbalar (References)
@@ -41,3 +40,4 @@ Add RestResponse trait to app module Controller file or any controller which is 
 - [Publish assets](https://freek.dev/424-publishing-package-assets-the-right-way)
 - [Read file as lines](https://code.tutsplus.com/read-a-file-line-by-line-with-php--cms-92971t)
 - [Add item to any index](https://www.geeksforgeeks.org/program-to-insert-new-item-in-array-on-any-position-in-php/)
+- [Right trim](https://www.php.net/manual/en/function.rtrim.php)
