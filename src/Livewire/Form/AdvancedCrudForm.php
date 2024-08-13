@@ -74,7 +74,7 @@ class AdvancedCrudForm extends Form {
 
     // other
     #[Validate('required|numeric')]
-    public $crudType = '';
+    public $crudType = 1;
 
 
     public function store(GenerateCrud $service): void {
