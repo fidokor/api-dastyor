@@ -16,7 +16,15 @@
             @include(Boot::getView('layouts.navbar'))
             <div class="content-wrapper">
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    @yield('content')
+                    <div class="row">
+                        <small class="text-light fw-medium">Dastyorlar</small>
+                        <div class="bs-stepper vertical wizard-modern w-100">
+                            @include(Boot::getView('layouts.menu'))
+                            <div class="bs-dark-stepper-content w-100">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @include(Boot::getView('layouts.footer'))
                 <div class="content-backdrop fade"></div>
