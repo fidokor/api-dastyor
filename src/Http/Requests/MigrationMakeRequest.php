@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Requests;
+namespace Uzinfocom\Dastyor\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Controllers;
+namespace Uzinfocom\Dastyor\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 

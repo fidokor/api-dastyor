@@ -1,8 +1,8 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services;
+namespace Uzinfocom\Dastyor\Services;
 
-use Uzinfocom\LaravelGenerator\Container\IGenerator;
+use Uzinfocom\Dastyor\Container\IGenerator;
 
 class ServiceGenerator extends AllGenerator implements IGenerator {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Controllers\Builders;
+namespace Uzinfocom\Dastyor\Http\Controllers\Builders;
 
 use Illuminate\Contracts\View\View;
-use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Controller;
+use Uzinfocom\Dastyor\Boot\Boot;
+use Uzinfocom\Dastyor\Http\Controllers\Controller;
 
 class MigrationBuilderController extends Controller {
     public function __invoke(): View {

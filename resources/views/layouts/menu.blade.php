@@ -5,7 +5,7 @@
                 <i class="ti ti-file-description"></i>
               </span>
             <span class="bs-stepper-label">
-                <span class="bs-stepper-title">Migratsiya yaratish</span>
+                <span class="bs-stepper-title">Jadval quruvchi</span>
             </span>
         </button>
     </a>
@@ -16,7 +16,7 @@
                 <i class="ti ti-code"></i>
               </span>
             <span class="bs-stepper-label">
-                <span class="bs-stepper-title">Code generatsiya</span>
+                <span class="bs-stepper-title">Tezkor uskunlar</span>
             </span>
         </button>
     </a>

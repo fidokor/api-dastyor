@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services;
+namespace Uzinfocom\Dastyor\Services;
 
 use Ijodkor\ApiResponse\Responses\RestResponse;
 use Illuminate\Database\Eloquent\Model;

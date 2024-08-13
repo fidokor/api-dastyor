@@ -1,22 +1,22 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator;
+namespace Uzinfocom\Dastyor;
 
 use Illuminate\Contracts\Foundation\CachesRoutes;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Livewire\AdvancedCrudWire;
-use Uzinfocom\LaravelGenerator\Livewire\ControllerWire;
-use Uzinfocom\LaravelGenerator\Livewire\EnumWire;
-use Uzinfocom\LaravelGenerator\Livewire\MethodWire;
-use Uzinfocom\LaravelGenerator\Livewire\MigrationWire;
-use Uzinfocom\LaravelGenerator\Livewire\ModelRelationWire;
-use Uzinfocom\LaravelGenerator\Livewire\ModelWire;
-use Uzinfocom\LaravelGenerator\Livewire\RequestWire;
-use Uzinfocom\LaravelGenerator\Livewire\ResourceWire;
-use Uzinfocom\LaravelGenerator\Livewire\ServiceWire;
+use Uzinfocom\Dastyor\Boot\Boot;
+use Uzinfocom\Dastyor\Livewire\AdvancedCrudWire;
+use Uzinfocom\Dastyor\Livewire\ControllerWire;
+use Uzinfocom\Dastyor\Livewire\EnumWire;
+use Uzinfocom\Dastyor\Livewire\MethodWire;
+use Uzinfocom\Dastyor\Livewire\MigrationWire;
+use Uzinfocom\Dastyor\Livewire\ModelRelationWire;
+use Uzinfocom\Dastyor\Livewire\ModelWire;
+use Uzinfocom\Dastyor\Livewire\RequestWire;
+use Uzinfocom\Dastyor\Livewire\ResourceWire;
+use Uzinfocom\Dastyor\Livewire\ServiceWire;
 
 class MainServiceProvider extends ServiceProvider {
 
@@ -34,7 +34,6 @@ class MainServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot(): void {
-        $this->registerEvents();
         $this->registerCommands();
 
         $this->registerRoutes();
@@ -45,21 +44,6 @@ class MainServiceProvider extends ServiceProvider {
 
         $this->assetsPublish();
         $this->registerHelper();
-    }
-
-    /**
-     * Register the H job events.
-     *
-     * @return void
-     */
-    protected function registerEvents(): void {
-//        $events = $this->app->make(Dispatcher::class);
-
-//        foreach ($this->events as $event => $listeners) {
-//            foreach ($listeners as $listener) {
-//                $events->listen($event, $listener);
-//            }
-//        }
     }
 
     /**
@@ -75,7 +59,6 @@ class MainServiceProvider extends ServiceProvider {
         Route::group([
             'domain' => config("$this->namespace.domain", null),
             'prefix' => config("$this->namespace.path"),
-            // 'namespace' => 'Uzinfocom\LaravelGenerator\Http\Controllers',
             'middleware' => config("$this->namespace.middleware", 'web'),
         ], function() {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -123,7 +106,7 @@ class MainServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Setup the configuration for H.
+     * Set up the configuration for H.
      *
      * @return void
      */

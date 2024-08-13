@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Livewire;
+namespace Uzinfocom\Dastyor\Livewire;
 
 class ControllerWire extends GeneratorWire {
 

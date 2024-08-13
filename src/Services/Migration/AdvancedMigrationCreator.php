@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services\Migration;
+namespace Uzinfocom\Dastyor\Services\Migration;
 
 use Illuminate\Database\Migrations\MigrationCreator;
 

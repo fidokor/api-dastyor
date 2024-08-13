@@ -1,9 +1,9 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Livewire;
+namespace Uzinfocom\Dastyor\Livewire;
 
-use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
+use Uzinfocom\Dastyor\Boot\Boot;
+use Uzinfocom\Dastyor\Services\Utils\EntityFinderService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
