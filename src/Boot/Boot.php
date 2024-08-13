@@ -41,6 +41,7 @@ class Boot {
             "css/core.css",
             "css/theme-default.css",
             "css/demo.css",
+            "css/bs-stepper.css",
         ];
         $styles = [];
         foreach ($files as $file) {
@@ -54,6 +55,7 @@ class Boot {
         $files = [
             "js/jquery.js",
             "js/bootstrap.js",
+            "js/bs-stepper.js",
         ];
         $scripts = [];
         foreach ($files as $file) {
