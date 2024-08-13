@@ -32,6 +32,7 @@ class GenerateCrud extends AllGenerator {
         $stub = str_replace([
             '{{ namespace }}',
             '{{ controllerName }}',
+            '{{ baseController }}',
             '{{ modelName }}',
             '{{ modelNamePlural }}',
             '{{ modelNameSingular }}',
@@ -40,6 +41,7 @@ class GenerateCrud extends AllGenerator {
         ], [
             $namespace,
             $controllerName,
+            $form['baseController'],
             $modelName,
             $modelNamePlural,
             $modelNameSingular,
