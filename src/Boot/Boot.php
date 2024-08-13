@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Boot;
+namespace Uzinfocom\Dastyor\Boot;
 
 
 use Illuminate\Support\Facades\File;

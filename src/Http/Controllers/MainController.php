@@ -1,9 +1,9 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Controllers;
+namespace Uzinfocom\Dastyor\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Uzinfocom\LaravelGenerator\Boot\Boot;
+use Uzinfocom\Dastyor\Boot\Boot;
 
 class MainController extends Controller {
 

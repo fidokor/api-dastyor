@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services\Utils;
+namespace Uzinfocom\Dastyor\Services\Utils;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

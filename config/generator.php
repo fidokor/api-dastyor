@@ -19,7 +19,7 @@ return [
     |
     */
 
-    'path' => env('GENERATOR_PATH', 'generator'),
+    'path' => env('GENERATOR_PATH', 'dastyor'),
 
     /*
     |---------------------------------------------------------------------------

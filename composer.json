@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Uzinfocom\\LaravelGenerator\\": "src/"
+            "Uzinfocom\\Dastyor\\": "src/"
         },
         "files": [
             "src/Helpers/helper.php"
@@ -53,10 +53,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Uzinfocom\\LaravelGenerator\\MainServiceProvider"
+                "Uzinfocom\\Dastyor\\MainServiceProvider"
             ],
             "aliases": {
-                "LaravelGenerator": "Uzinfocom\\LaravelGenerator"
+                "Dastyor": "Uzinfocom\\Dastyor"
             }
         }
     }

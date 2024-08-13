@@ -81,8 +81,8 @@
                             <th>Ustun nomi</th>
                             <th>Ustun turi</th>
                             <th>Uzunligi</th>
-                            <th>Boshlang&#8216;ich (Default)</th>
-                            <th>(Nullable)</th>
+                            <th>Boshlang&#8216;ich</th>
+                            <th>Bo&#8216;sh</th>
                             <th>Indekslangan</th>
                             <th>Bog&#8216;lanish</th>
                         </tr>

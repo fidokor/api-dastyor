@@ -1,15 +1,15 @@
 <?php
 
-use Uzinfocom\LaravelGenerator\Http\Controllers\Advanced\CrudController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Builders\MigrationBuilderController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ControllerGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\EnumGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\MethodGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ModelGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\RequestGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ResourceGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Generator\ServiceGenerateController;
-use Uzinfocom\LaravelGenerator\Http\Controllers\MainController;
+use Uzinfocom\Dastyor\Http\Controllers\Advanced\CrudController;
+use Uzinfocom\Dastyor\Http\Controllers\Builders\MigrationBuilderController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\ControllerGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\EnumGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\MethodGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\ModelGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\RequestGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\ResourceGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\Generator\ServiceGenerateController;
+use Uzinfocom\Dastyor\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class)->name('generator.index');

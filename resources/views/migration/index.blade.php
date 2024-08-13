@@ -1,6 +1,6 @@
 @extends(config('generator.layout'))
 @section('title')
-    {{ "M" }}
+    {{ "Jadval quruvchi" }}
 @endsection
 @section('content')
     <div class="content {{ request()->routeIs('migration.*') ? 'active' : '' }}">

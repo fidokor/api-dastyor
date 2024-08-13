@@ -1,9 +1,9 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services;
+namespace Uzinfocom\Dastyor\Services;
 
 use Illuminate\Support\Facades\File;
-use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
+use Uzinfocom\Dastyor\Helpers\StorageManager;
 
 class AllGenerator {
     use StorageManager;

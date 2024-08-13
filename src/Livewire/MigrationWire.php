@@ -1,15 +1,15 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Livewire;
+namespace Uzinfocom\Dastyor\Livewire;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Validate;
-use Uzinfocom\LaravelGenerator\Boot\Boot;
-use Uzinfocom\LaravelGenerator\Models\ColumnType;
-use Uzinfocom\LaravelGenerator\Services\Migration\MigrationBuildService;
-use Uzinfocom\LaravelGenerator\Services\Utils\EntityFinderService;
-use Uzinfocom\LaravelGenerator\Services\Utils\TableFinderService;
+use Uzinfocom\Dastyor\Boot\Boot;
+use Uzinfocom\Dastyor\Models\ColumnType;
+use Uzinfocom\Dastyor\Services\Migration\MigrationBuildService;
+use Uzinfocom\Dastyor\Services\Utils\EntityFinderService;
+use Uzinfocom\Dastyor\Services\Utils\TableFinderService;
 
 
 class MigrationWire extends GeneratorWire {

@@ -1,5 +1,5 @@
 @extends(config('generator.layout'))
-@php use Uzinfocom\LaravelGenerator\Boot\Boot; @endphp
+@php use Uzinfocom\Dastyor\Boot\Boot; @endphp
 @section('content')
     <div class="content {{ request()->routeIs('advanced.*') ? 'active' : '' }}">
         <div class="row">
