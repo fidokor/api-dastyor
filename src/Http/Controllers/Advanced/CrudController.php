@@ -1,12 +1,12 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Controllers\Advanced;
+namespace Uzinfocom\Dastyor\Http\Controllers\Advanced;
 
 use Exception;
-use Uzinfocom\LaravelGenerator\Http\Requests\CrudRequest;
-use Uzinfocom\LaravelGenerator\Services\Generator;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Controller;
-use Uzinfocom\LaravelGenerator\Http\Requests\GeneratorRequest;
+use Uzinfocom\Dastyor\Http\Requests\CrudRequest;
+use Uzinfocom\Dastyor\Services\Generator;
+use Uzinfocom\Dastyor\Http\Controllers\Controller;
+use Uzinfocom\Dastyor\Http\Requests\GeneratorRequest;
 
 class CrudController extends Controller {
 

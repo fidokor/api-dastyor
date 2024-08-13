@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Container;
+namespace Uzinfocom\Dastyor\Container;
 
 interface IGenerator {
 

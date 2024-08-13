@@ -1,10 +1,10 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Livewire;
+namespace Uzinfocom\Dastyor\Livewire;
 
 
-use Uzinfocom\LaravelGenerator\Livewire\Form\AdvancedCrudForm;
-use Uzinfocom\LaravelGenerator\Services\GenerateCrud;
+use Uzinfocom\Dastyor\Livewire\Form\AdvancedCrudForm;
+use Uzinfocom\Dastyor\Services\GenerateCrud;
 
 class AdvancedCrudWire extends GeneratorWire {
 

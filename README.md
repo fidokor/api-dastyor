@@ -1,6 +1,6 @@
-# Laravel Generator
+# API dastyor
 
-Laravel Generator
+Laravel dostyor, loyihani bir zumda qurishga yordam beradi
 
 ## Talablar (Requirements)
 
@@ -18,7 +18,7 @@ Laravel Generator
 Install the package via composer:
 
 ```bash
-composer require ijodkor/laravel-api-response
+composer require ijodkor/api-dastyor
 ```
 
 ## Ishlatish (Usage)
@@ -26,7 +26,7 @@ composer require ijodkor/laravel-api-response
 Add 
 
 ```php
-php artisan vendor:publish --provider="Uzinfocom\LaravelGenerator\MainServiceProvider"
+php artisan vendor:publish --provider="Uzinfocom\Dastyor\MainServiceProvider"
 ```
 
 # Foydalanilgan manbalar (References)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Helpers;
+namespace Uzinfocom\Dastyor\Helpers;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

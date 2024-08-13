@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Models;
+namespace Uzinfocom\Dastyor\Models;
 
 
 use Illuminate\Database\Eloquent\Model;

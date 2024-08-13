@@ -1,10 +1,10 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services\Migration;
+namespace Uzinfocom\Dastyor\Services\Migration;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
-use Uzinfocom\LaravelGenerator\Services\AllGenerator;
+use Uzinfocom\Dastyor\Services\AllGenerator;
 
 class MigrationBuildService extends AllGenerator {
 

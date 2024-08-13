@@ -1,6 +1,6 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Services\Utils;
+namespace Uzinfocom\Dastyor\Services\Utils;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;

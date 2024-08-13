@@ -1,11 +1,11 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Http\Controllers\Generator;
+namespace Uzinfocom\Dastyor\Http\Controllers\Generator;
 
 use Exception;
-use Uzinfocom\LaravelGenerator\Services\Generator;
-use Uzinfocom\LaravelGenerator\Http\Controllers\Controller;
-use Uzinfocom\LaravelGenerator\Http\Requests\GenerateServiceRequest;
+use Uzinfocom\Dastyor\Services\Generator;
+use Uzinfocom\Dastyor\Http\Controllers\Controller;
+use Uzinfocom\Dastyor\Http\Requests\GenerateServiceRequest;
 
 class ServiceGenerateController extends Controller {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Uzinfocom\LaravelGenerator\Livewire\Form;
+namespace Uzinfocom\Dastyor\Livewire\Form;
 
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Uzinfocom\LaravelGenerator\Helpers\StorageManager;
-use Uzinfocom\LaravelGenerator\Services\GenerateCrud;
+use Uzinfocom\Dastyor\Helpers\StorageManager;
+use Uzinfocom\Dastyor\Services\GenerateCrud;
 
 class AdvancedCrudForm extends Form {
     use StorageManager;
