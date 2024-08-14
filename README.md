@@ -23,18 +23,21 @@ composer require ijodkor/api-dastyor
 
 ## Ishlatish (Usage)
 
-Add 
+1. Media fayllar public papkaga chiqariladi
 
 ```php
 php artisan vendor:publish --provider="Uzinfocom\Dastyor\MainServiceProvider"
 ```
 
-# Foydalanilgan manbalar (References)
+2. ``/dastyor`` Manziliga o&#8216;tiladi.
+
+## Foydalanilgan manbalar (References)
 
 - [Testbench](https://packages.tools/testbench) Laravel Testing Helper for Packages Development
 
-# Foydali havolalar (Links)
+### Foydali havolalar (Links)
 
+- [PHP-FIG](https://www.php-fig.org/)
 - [Create Laravel package](https://laravel-news.com/building-your-own-laravel-packages)
 - [Create package](https://medium.com/@prevailexcellent/how-i-created-my-third-laravel-package-step-by-step-guide-ad3fb0da5399)
 - [Publish assets](https://freek.dev/424-publishing-package-assets-the-right-way)

@@ -98,8 +98,8 @@ class MainServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register(): void {
-        if (!defined('HORIZON_PATH')) {
-            define('HORIZON_PATH', realpath(__DIR__ . '/../'));
+        if (!defined('GENERATOR_PATH')) {
+            define('GENERATOR_PATH', realpath(__DIR__ . '/../'));
         }
 
         $this->configure();
