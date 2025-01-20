@@ -84,7 +84,7 @@ class MigrationWire extends GeneratorWire {
             'columns' => $this->columns->toArray()
         ]);
 
-        session()->flash('success', 'Jadval quruvchi muvaffaqiyatli yaratildi!');
+        session()->flash('success', 'Jadval muvaffaqiyatli yaratildi!');
     }
 
     public function render(): View {
